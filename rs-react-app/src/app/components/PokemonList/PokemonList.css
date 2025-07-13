@@ -1,0 +1,9 @@
+.search-results__title {
+  display: flex;
+  gap: 20px;
+}
+
+.search-results__item {
+  display: flex;
+  gap: 20px;
+}
