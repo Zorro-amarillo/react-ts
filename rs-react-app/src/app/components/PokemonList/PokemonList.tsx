@@ -14,7 +14,7 @@ class PokemonList extends Component<IPokemonListProps> {
       return <Pokemon key={index} pokemonData={pokemon} />;
     });
 
-    return <ul>{pokemonElements}</ul>;
+    return <ul className="search-results">{pokemonElements}</ul>;
   }
 }
 

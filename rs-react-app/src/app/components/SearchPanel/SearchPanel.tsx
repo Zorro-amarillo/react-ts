@@ -1,3 +1,4 @@
+import './SearchPanel.css';
 import { Component, type ChangeEvent } from 'react';
 import PokemonService from '../../../services/PokemonService/PokemonService';
 import PokemonList from '../PokemonList/PokemonList';
@@ -18,8 +19,9 @@ class SearchPanel extends Component {
 
     return (
       <div>
-        <form>
+        <form className="form">
           <input
+            className="input"
             type="text"
             placeholder="Enter Pokemon's Full Name"
             onChange={(e) => this.onValueChange(e)}
