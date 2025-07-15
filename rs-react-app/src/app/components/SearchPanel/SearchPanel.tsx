@@ -7,16 +7,11 @@ class SearchPanel extends Component {
   pokemonService = new PokemonService();
 
   state = {
-    inputValue: '',
+    inputValue: localStorage.getItem('lastPokemonSearch') ?? '',
     searchResults: [],
-    firstLoad: true,
   };
 
   render() {
-    if (this.state.firstLoad) {
-      this.loadAllPokemons();
-    }
-
     return (
       <div>
         <form className="form">
@@ -42,19 +37,33 @@ class SearchPanel extends Component {
     );
   }
 
+  componentDidMount(): void {
+    this.loadStartData();
+  }
+
+  loadStartData = async () => {
+    const { inputValue } = this.state;
+
+    if (inputValue) {
+      await this.searchPokemon();
+    } else {
+      this.loadAllPokemons();
+    }
+  };
+
   async loadAllPokemons() {
     const data = await this.pokemonService.getAllPokemons();
     this.setState({
       searchResults: data.results,
-      firstLoad: false,
     });
   }
 
-  searchPokemon = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  searchPokemon = async (e?: React.MouseEvent<HTMLButtonElement>) => {
+    e?.preventDefault();
 
     try {
       const { inputValue } = this.state;
+      localStorage.setItem('lastPokemonSearch', inputValue.toLowerCase());
 
       if (!inputValue.trim()) {
         const allPokemons = await this.pokemonService.getAllPokemons();
@@ -73,8 +82,6 @@ class SearchPanel extends Component {
         if (pokemon !== undefined) {
           console.log('Found Pokemon:', pokemon);
         }
-
-        localStorage.setItem('lastPokemonSearch', inputValue.toLowerCase());
       }
     } catch (err) {
       console.error(`SearchPanel.searchPokemon() failed. ${err}`);
