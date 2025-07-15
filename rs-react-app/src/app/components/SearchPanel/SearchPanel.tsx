@@ -1,5 +1,5 @@
 import './SearchPanel.css';
-import { Component, type ChangeEvent } from 'react';
+import { Component, type ChangeEvent, type MouseEvent } from 'react';
 import PokemonService from '../../../services/PokemonService/PokemonService';
 import PokemonList from '../PokemonList/PokemonList';
 
@@ -24,7 +24,7 @@ class SearchPanel extends Component {
             className="input"
             type="text"
             placeholder="Enter Full Name or Id"
-            onChange={(e) => this.onValueChange(e)}
+            onChange={(e) => this.onInputValueChange(e)}
             value={this.state.inputValue}
           />
           <button onClick={this.searchPokemon}>Search Pokemon</button>
@@ -35,6 +35,9 @@ class SearchPanel extends Component {
           <h2>Link to Pokemon JSON</h2>
         </div>
         <PokemonList data={this.state.searchResults} />
+        <button type="button" onClick={this.onErrorBtnClick}>
+          Error Button
+        </button>
       </div>
     );
   }
@@ -78,10 +81,22 @@ class SearchPanel extends Component {
     }
   };
 
-  onValueChange = (event: ChangeEvent<HTMLInputElement>) => {
+  onInputValueChange = (event: ChangeEvent<HTMLInputElement>) => {
     this.setState({
       inputValue: event.target.value,
     });
+  };
+
+  onErrorBtnClick = (e: MouseEvent<HTMLButtonElement>) => {
+    this.setState(
+      {
+        inputValue: 'pika',
+      },
+      () => {
+        this.searchPokemon(e);
+        this.pokemonService.getPokemon(this.state.inputValue);
+      }
+    );
   };
 }
 
