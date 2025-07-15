@@ -23,7 +23,7 @@ class SearchPanel extends Component {
           <input
             className="input"
             type="text"
-            placeholder="Enter Pokemon's Full Name"
+            placeholder="Enter Full Name or Id"
             onChange={(e) => this.onValueChange(e)}
             value={this.state.inputValue}
           />
@@ -66,12 +66,15 @@ class SearchPanel extends Component {
         this.setState({
           searchResults: [pokemon],
         });
-        console.log('Found Pokemon:', pokemon);
+
+        if (pokemon !== undefined) {
+          console.log('Found Pokemon:', pokemon);
+        }
 
         localStorage.setItem('lastPokemonSearch', inputValue.toLowerCase());
       }
     } catch (err) {
-      console.error(`SearchPanel.searchPokemon error: ${err}`);
+      console.error(`SearchPanel.searchPokemon() failed. ${err}`);
     }
   };
 

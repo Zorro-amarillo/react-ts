@@ -1,17 +1,44 @@
+import type { IServiceError } from '../../types/types';
+
+class ServiceError extends Error implements IServiceError {
+  status: number;
+  errorText: string;
+
+  constructor(message: string, status: number, errorText: string) {
+    super(message);
+    this.name = 'ServiceError';
+    this.status = status;
+    this.errorText = errorText;
+  }
+}
+
 class PokemonService {
   allPokemonsUrl = 'https://pokeapi.co/api/v2/pokemon';
 
   getPokemonData = async (url: string) => {
-    const response = await fetch(url);
+    try {
+      const response = await fetch(url);
 
-    if (!response.ok) {
-      throw new Error(
-        `PokemonService.getResource error. Url: ${url}. Status: ${response.status}`
-      );
+      if (!response.ok) {
+        const errorText = await response.text();
+
+        throw new ServiceError(
+          `PokemonService.getPokemonData() failed, url: ${url}`,
+          response.status,
+          errorText
+        );
+      }
+
+      return await response.json();
+    } catch (err) {
+      if (err instanceof Error) {
+        if ('status' in err && 'errorText' in err) {
+          console.error(
+            `${err}. Status: ${err.status}. Error text: ${err.errorText}`
+          );
+        }
+      }
     }
-
-    const result = await response.json();
-    return result;
   };
 
   getAllPokemons = async (page = 1) => {
@@ -23,11 +50,24 @@ class PokemonService {
   };
 
   getPokemon = async (pokemon: string) => {
-    const url = `${this.allPokemonsUrl}/${pokemon}`;
-    const pokemonData = await this.getPokemonData(url);
-    pokemonData.url = `${this.allPokemonsUrl}/${pokemonData.id}`;
+    try {
+      const url = `${this.allPokemonsUrl}/${pokemon}`;
+      const pokemonData = await this.getPokemonData(url);
 
-    return pokemonData;
+      if (!pokemonData) {
+        throw new Error('Pokemon is not found');
+      }
+
+      pokemonData.url = `${this.allPokemonsUrl}/${pokemonData.id}`;
+
+      return pokemonData;
+    } catch (err) {
+      if (err instanceof Error) {
+        if (err.message !== 'Pokemon is not found') {
+          console.error(err);
+        }
+      }
+    }
   };
 }
 
