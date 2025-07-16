@@ -1,5 +1,5 @@
 import './SearchPanel.css';
-import { Component, type ChangeEvent, type MouseEvent } from 'react';
+import { Component, type ChangeEvent } from 'react';
 import PokemonService from '../../../services/PokemonService/PokemonService';
 import PokemonList from '../PokemonList/PokemonList';
 import Loader from '../Loader/Loader';
@@ -11,9 +11,14 @@ class SearchPanel extends Component {
     inputValue: localStorage.getItem('lastPokemonSearch') ?? '',
     searchResults: [],
     isLoading: false,
+    isErrorBoundary: false,
   };
 
   render() {
+    if (this.state.isErrorBoundary) {
+      throw new Error('Special Error to Test ErrorBoundary');
+    }
+
     const { isLoading, searchResults } = this.state;
 
     return (
@@ -50,7 +55,11 @@ class SearchPanel extends Component {
         {isLoading ? <Loader /> : <PokemonList data={searchResults} />}
         <button
           type="button"
-          onClick={this.onErrorBtnClick}
+          onClick={() =>
+            this.setState({
+              isErrorBoundary: true,
+            })
+          }
           className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
         >
           Error Button
@@ -134,18 +143,6 @@ class SearchPanel extends Component {
     this.setState({
       inputValue: event.target.value,
     });
-  };
-
-  onErrorBtnClick = (e: MouseEvent<HTMLButtonElement>) => {
-    this.setState(
-      {
-        inputValue: 'pika',
-      },
-      () => {
-        this.searchPokemon(e);
-        this.pokemonService.getPokemon(this.state.inputValue);
-      }
-    );
   };
 }
 
