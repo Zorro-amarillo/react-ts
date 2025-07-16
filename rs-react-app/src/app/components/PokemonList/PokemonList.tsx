@@ -15,7 +15,9 @@ class PokemonList extends Component<IPokemonListProps> {
       if (!pokemon) {
         return (
           <ErrorBoundary key={`error-boundary-${index}`}>
-            <div>⚠️ Invalid Pokemon Data. Please Enter Full Name or Id ⚠️</div>
+            <p className="mb-3 text-gray-500">
+              ⚠️ Invalid Pokemon Data. Please Enter Full Name or Id ⚠️
+            </p>
           </ErrorBoundary>
         );
       }

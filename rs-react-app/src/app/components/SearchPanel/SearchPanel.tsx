@@ -20,21 +20,39 @@ class SearchPanel extends Component {
       <div>
         <form className="form">
           <input
-            className="input"
+            className="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             type="text"
             placeholder="Enter Full Name or Id"
             onChange={(e) => this.onInputValueChange(e)}
             value={this.state.inputValue}
           />
-          <button onClick={this.searchPokemon}>Search Pokemon</button>
+          <button
+            onClick={this.searchPokemon}
+            className="text-white bg-gradient-to-r from-purple-500 to-pink-500
+             hover:bg-gradient-to-l focus:ring-4 focus:outline-none
+             focus:ring-purple-200 dark:focus:ring-purple-800
+             font-medium rounded-lg text-xs
+             px-4 py-2
+             whitespace-nowrap"
+          >
+            Search Pokemon
+          </button>
         </form>
-        <h1>Pokemon Search Results</h1>
+        <h1 className="mb-4 mt-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl">
+          Pokemon Search Results
+        </h1>
         <div className="search-results__title">
-          <h2>Pokemon</h2>
-          <h2>Link to Pokemon JSON</h2>
+          <h2 className="text-3xl font-extrabold text-gray-500">Pokemon</h2>
+          <h2 className="text-3xl font-extrabold text-gray-500">
+            Link to Pokemon JSON
+          </h2>
         </div>
         {isLoading ? <Loader /> : <PokemonList data={searchResults} />}
-        <button type="button" onClick={this.onErrorBtnClick}>
+        <button
+          type="button"
+          onClick={this.onErrorBtnClick}
+          className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+        >
           Error Button
         </button>
       </div>

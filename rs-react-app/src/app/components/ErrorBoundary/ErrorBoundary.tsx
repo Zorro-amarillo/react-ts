@@ -14,7 +14,7 @@ class ErrorBoundary extends Component<
 
   render() {
     if (this.state.error) {
-      return <p>Warning</p>;
+      return <p className="mb-3 text-gray-500">Something went wrong</p>;
     }
 
     return this.props.children;
