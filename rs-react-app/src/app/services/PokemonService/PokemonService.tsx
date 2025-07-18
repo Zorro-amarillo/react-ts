@@ -1,4 +1,4 @@
-import type { IServiceError } from '../../types/types';
+import type { IServiceError } from '../../../types/types';
 
 class ServiceError extends Error implements IServiceError {
   status: number;

@@ -1,6 +1,6 @@
 import './SearchPanel.css';
 import { Component, type ChangeEvent } from 'react';
-import PokemonService from '../../../services/PokemonService/PokemonService';
+import PokemonService from '../../services/PokemonService/PokemonService';
 import PokemonList from '../PokemonList/PokemonList';
 import Loader from '../Loader/Loader';
 

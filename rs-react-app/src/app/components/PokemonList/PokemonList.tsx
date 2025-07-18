@@ -3,7 +3,7 @@ import { Component } from 'react';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import type { IPokemonListProps } from '../../../types/types';
 import Pokemon from '../Pokemon/Pokemon';
-import PokemonService from '../../../services/PokemonService/PokemonService';
+import PokemonService from '../../services/PokemonService/PokemonService';
 
 class PokemonList extends Component<IPokemonListProps> {
   pokemonService = new PokemonService();
