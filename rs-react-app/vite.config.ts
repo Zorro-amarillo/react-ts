@@ -9,16 +9,16 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: ['./src/setupTests.tsx'],
+    setupFiles: ['./tests/setupTests.tsx'],
     coverage: {
       provider: 'v8',
       include: ['src/**/*.{js,jsx,ts,tsx}'],
       exclude: [
-        'src/**/*.test.{js,jsx,ts,tsx}',
-        'src/**/*.spec.{js,jsx,ts,tsx}',
-        'src/index.{js,jsx,ts,tsx}',
-        'src/setupTests.{js,ts}',
-        'src/**/*.d.ts',
+        './**/*.test.{js,jsx,ts,tsx}',
+        './**/*.spec.{js,jsx,ts,tsx}',
+        './index.{js,jsx,ts,tsx}',
+        './tests/setupTests.{js,ts}',
+        './**/*.d.ts',
       ],
       thresholds: {
         global: {
