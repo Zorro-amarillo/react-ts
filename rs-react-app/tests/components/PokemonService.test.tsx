@@ -1,6 +1,7 @@
 import PokemonService from '../../src/app/services/PokemonService/PokemonService';
 
 describe('PokemonService', () => {
+  const baseUrl = 'https://pokeapi.co/api/v2/pokemon';
   const mockedFetch = vi.fn();
 
   beforeEach(() => {
@@ -46,7 +47,6 @@ describe('PokemonService', () => {
   });
 
   it('getAllPokemons should fetch Pokemons', async () => {
-    const baseUrl = 'https://pokeapi.co/api/v2/pokemon';
     const mockedPage = 3;
     const mockedPageLimit = 20;
     const mockedOffset = (mockedPage - 1) * mockedPageLimit;
@@ -76,10 +76,10 @@ describe('PokemonService', () => {
 
   it('getPokemon should fetch Pokemon', async () => {
     const pokemonName = 'bulbasaur';
-    const baseUrl = 'https://pokeapi.co/api/v2/pokemon/';
+    const mockedUrl = `${baseUrl}/${pokemonName}`;
     const mockedData = {
       name: pokemonName,
-      url: `${baseUrl}/${pokemonName}`,
+      url: mockedUrl,
       id: 1,
     };
     const mockedResponse = new Response(JSON.stringify(mockedData), {
@@ -95,10 +95,10 @@ describe('PokemonService', () => {
     const result = await pokemonService.getPokemon(pokemonName);
     const updatedResult = {
       ...result,
-      url: `${baseUrl}${mockedData.id}`,
+      url: `${baseUrl}/${mockedData.id}`,
     };
 
     expect(result).toEqual(updatedResult);
-    expect(mockedFetch).toHaveBeenCalledWith(`${baseUrl}${pokemonName}`);
+    expect(mockedFetch).toHaveBeenCalledWith(mockedUrl);
   });
 });
