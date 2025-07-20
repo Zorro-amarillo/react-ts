@@ -52,4 +52,15 @@ describe('PokemonList', () => {
     expect(list).toBeInTheDocument();
     expect(list).toBeEmptyDOMElement();
   });
+
+  it('should render error message for invalid Pokemon data', () => {
+    const mockedData = [null];
+
+    render(<PokemonList data={mockedData} />);
+
+    expect(screen.getByText('⚠️ Invalid Pokemon Data ⚠️')).toBeInTheDocument();
+    expect(
+      screen.getByText('Please Enter Full Name or Id')
+    ).toBeInTheDocument();
+  });
 });

@@ -8,7 +8,7 @@ export interface IPokemonProps {
 }
 
 export interface IPokemonListProps {
-  data: IPokemonData[];
+  data: (IPokemonData | null)[];
 }
 
 export interface IErrorBoundaryProps {
