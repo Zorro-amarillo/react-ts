@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import SearchPanel from '../../src/app/components/SearchPanel/SearchPanel';
 
 describe('SearchPanel', () => {
@@ -33,6 +34,17 @@ describe('SearchPanel', () => {
 
     if (input instanceof HTMLInputElement) {
       expect(input.value).toBe('');
+    }
+  });
+
+  it('should update Pokemon input value on change', async () => {
+    render(<SearchPanel />);
+
+    const input = screen.getByPlaceholderText('Enter Full Name or Id');
+
+    if (input instanceof HTMLInputElement) {
+      await userEvent.type(input, 'ditto');
+      expect(input.value).toBe('ditto');
     }
   });
 });
