@@ -1,149 +1,136 @@
 import './SearchPanel.css';
-import { Component, type ChangeEvent } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  type ChangeEvent,
+} from 'react';
 import PokemonService from '../../services/PokemonService/PokemonService';
 import PokemonList from '../PokemonList/PokemonList';
+import type { IPokemonData } from '../../../types/types';
 import Loader from '../Loader/Loader';
 
-class SearchPanel extends Component {
-  pokemonService = new PokemonService();
+const SearchPanel = () => {
+  const [inputValue, setInputValue] = useState(
+    localStorage.getItem('lastPokemonSearch') ?? ''
+  );
+  const [searchResults, setSearchResults] = useState<IPokemonData[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isErrorBoundary, setIsErrorBoundary] = useState(false);
 
-  state = {
-    inputValue: localStorage.getItem('lastPokemonSearch') ?? '',
-    searchResults: [],
-    isLoading: false,
-    isErrorBoundary: false,
-  };
+  const pokemonService = useMemo(() => new PokemonService(), []);
 
-  render() {
-    if (this.state.isErrorBoundary) {
-      throw new Error('Special Error to Test ErrorBoundary');
-    }
-
-    const { isLoading, searchResults } = this.state;
-
-    return (
-      <div>
-        <form className="form">
-          <input
-            className="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            type="text"
-            placeholder="Enter Full Name or Id"
-            onChange={(e) => this.onInputValueChange(e)}
-            value={this.state.inputValue}
-          />
-          <button
-            onClick={this.searchPokemon}
-            className="text-white bg-gradient-to-r from-purple-500 to-pink-500
-             hover:bg-gradient-to-l focus:ring-4 focus:outline-none
-             focus:ring-purple-200 dark:focus:ring-purple-800
-             font-medium rounded-lg text-xs
-             px-4 py-2
-             whitespace-nowrap"
-          >
-            Search Pokemon
-          </button>
-        </form>
-        <h1 className="mb-4 mt-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl">
-          Pokemon Search Results
-        </h1>
-        <div className="search-results__title">
-          <h2 className="text-3xl font-extrabold text-gray-500">Pokemon</h2>
-          <h2 className="text-3xl font-extrabold text-gray-500">
-            Link to Pokemon JSON
-          </h2>
-        </div>
-        {isLoading ? <Loader /> : <PokemonList data={searchResults} />}
-        <button
-          type="button"
-          onClick={() =>
-            this.setState({
-              isErrorBoundary: true,
-            })
-          }
-          className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-        >
-          Error Button
-        </button>
-      </div>
-    );
-  }
-
-  componentDidMount(): void {
-    this.loadStartData();
-  }
-
-  loadStartData = async () => {
-    const { inputValue } = this.state;
-
-    if (inputValue) {
-      await this.searchPokemon();
-    } else {
-      this.loadAllPokemons();
-    }
-  };
-
-  async loadAllPokemons() {
-    this.setState({
-      isLoading: true,
-    });
+  const loadAllPokemons = useCallback(async () => {
+    setIsLoading(true);
 
     try {
-      const data = await this.pokemonService.getAllPokemons();
-      this.setState({
-        searchResults: data.results,
-        isLoading: false,
-      });
+      const data = await pokemonService.getAllPokemons();
+
+      setSearchResults(data.results);
+      setIsLoading(false);
     } catch (err) {
-      this.setState({
-        isLoading: false,
-      });
+      setIsLoading(false);
       console.error(`SearchPanel.loadAllPokemons() failed: ${err}`);
     }
+  }, [pokemonService]);
+
+  const searchPokemon = useCallback(
+    async (e?: React.MouseEvent<HTMLButtonElement>) => {
+      e?.preventDefault();
+      setIsLoading(true);
+
+      try {
+        localStorage.setItem('lastPokemonSearch', inputValue.toLowerCase());
+
+        if (!inputValue.trim()) {
+          const allPokemons = await pokemonService.getAllPokemons();
+          console.log('Input is empty. Found Pokemons:', allPokemons.results);
+
+          setSearchResults(allPokemons.results);
+          setIsLoading(false);
+        } else {
+          const pokemon = await pokemonService.getPokemon(inputValue);
+
+          setSearchResults([pokemon]);
+          setIsLoading(false);
+
+          if (pokemon !== undefined) {
+            console.log('Found Pokemon:', pokemon);
+          }
+        }
+      } catch (err) {
+        setIsLoading(false);
+        console.error(`SearchPanel.searchPokemon() failed. ${err}`);
+      }
+    },
+    [inputValue, pokemonService]
+  );
+
+  const loadStartData = useCallback(
+    () => async () => {
+      if (inputValue) {
+        await searchPokemon();
+      } else {
+        loadAllPokemons();
+      }
+    },
+    [inputValue, loadAllPokemons, searchPokemon]
+  );
+
+  useEffect(() => {
+    loadStartData();
+  }, [loadStartData]);
+
+  const onInputValueChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value);
+  };
+
+  if (isErrorBoundary) {
+    throw new Error('Special Error to Test ErrorBoundary');
   }
 
-  searchPokemon = async (e?: React.MouseEvent<HTMLButtonElement>) => {
-    e?.preventDefault();
-    this.setState({
-      isLoading: true,
-    });
-
-    try {
-      const { inputValue } = this.state;
-      localStorage.setItem('lastPokemonSearch', inputValue.toLowerCase());
-
-      if (!inputValue.trim()) {
-        const allPokemons = await this.pokemonService.getAllPokemons();
-        console.log('Input is empty. Found Pokemons:', allPokemons.results);
-
-        this.setState({
-          searchResults: allPokemons.results,
-          isLoading: false,
-        });
-      } else {
-        const pokemon = await this.pokemonService.getPokemon(inputValue);
-
-        this.setState({
-          searchResults: [pokemon],
-          isLoading: false,
-        });
-
-        if (pokemon !== undefined) {
-          console.log('Found Pokemon:', pokemon);
-        }
-      }
-    } catch (err) {
-      this.setState({
-        isLoading: false,
-      });
-      console.error(`SearchPanel.searchPokemon() failed. ${err}`);
-    }
-  };
-
-  onInputValueChange = (event: ChangeEvent<HTMLInputElement>) => {
-    this.setState({
-      inputValue: event.target.value,
-    });
-  };
-}
+  return (
+    <div>
+      <form className="form">
+        <input
+          className="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          type="text"
+          placeholder="Enter Full Name or Id"
+          onChange={(e) => onInputValueChange(e)}
+          value={inputValue}
+        />
+        <button
+          onClick={searchPokemon}
+          className="text-white bg-gradient-to-r from-purple-500 to-pink-500
+            hover:bg-gradient-to-l focus:ring-4 focus:outline-none
+            focus:ring-purple-200 dark:focus:ring-purple-800
+            font-medium rounded-lg text-xs
+            px-4 py-2
+            whitespace-nowrap"
+        >
+          Search Pokemon
+        </button>
+      </form>
+      <h1 className="mb-4 mt-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl">
+        Pokemon Search Results
+      </h1>
+      <div className="search-results__title">
+        <h2 className="text-3xl font-extrabold text-gray-500">Pokemon</h2>
+        <h2 className="text-3xl font-extrabold text-gray-500">
+          Link to Pokemon JSON
+        </h2>
+      </div>
+      {isLoading ? <Loader /> : <PokemonList data={searchResults} />}
+      <button
+        type="button"
+        onClick={() => setIsErrorBoundary(true)}
+        className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+      >
+        Error Button
+      </button>
+    </div>
+  );
+};
 
 export default SearchPanel;
