@@ -5,9 +5,7 @@ import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 const App = () => {
   return (
     <ErrorBoundary>
-      <div className="app">
-        <SearchPanel />
-      </div>
+      <SearchPanel />
     </ErrorBoundary>
   );
 };
