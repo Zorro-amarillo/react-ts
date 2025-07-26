@@ -4,16 +4,16 @@ import usePokemonService from '../../services/usePokemonService/usePokemonServic
 import PokemonList from '../PokemonList/PokemonList';
 import type { IPokemonData } from '../../../types/types';
 import Loader from '../Loader/Loader';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 const SearchPanel = () => {
-  const [inputValue, setInputValue] = useState(
-    localStorage.getItem('lastPokemonSearch') ?? ''
-  );
   const [searchResults, setSearchResults] = useState<IPokemonData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isErrorBoundary, setIsErrorBoundary] = useState(false);
 
   const { getAllPokemons, getPokemon } = usePokemonService();
+  const { savedPokemon, savePokemon } = useLocalStorage();
+  const inputValue = savedPokemon;
 
   const loadAllPokemons = useCallback(async () => {
     setIsLoading(true);
@@ -35,7 +35,7 @@ const SearchPanel = () => {
       setIsLoading(true);
 
       try {
-        localStorage.setItem('lastPokemonSearch', inputValue.toLowerCase());
+        // localStorage.setItem('lastPokemonSearch', inputValue.toLowerCase());
 
         if (!inputValue.trim()) {
           const allPokemons = await getAllPokemons();
@@ -61,23 +61,20 @@ const SearchPanel = () => {
     [inputValue, getAllPokemons, getPokemon]
   );
 
-  const loadStartData = useCallback(
-    () => async () => {
-      if (inputValue) {
-        await searchPokemon();
-      } else {
-        loadAllPokemons();
-      }
-    },
-    [inputValue, loadAllPokemons, searchPokemon]
-  );
+  const loadStartData = useCallback(async () => {
+    if (inputValue) {
+      await searchPokemon();
+    } else {
+      await loadAllPokemons();
+    }
+  }, [inputValue, loadAllPokemons, searchPokemon]);
 
   useEffect(() => {
     loadStartData();
   }, [loadStartData]);
 
   const onInputValueChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
+    savePokemon(event.target.value);
   };
 
   if (isErrorBoundary) {
