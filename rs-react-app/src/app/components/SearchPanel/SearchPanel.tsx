@@ -9,7 +9,6 @@ import useLocalStorage from '../../hooks/useLocalStorage';
 const SearchPanel = () => {
   const [searchResults, setSearchResults] = useState<IPokemonData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isErrorBoundary, setIsErrorBoundary] = useState(false);
 
   const { getAllPokemons, getPokemon } = usePokemonService();
   const { savedPokemon, savePokemon } = useLocalStorage();
@@ -35,8 +34,6 @@ const SearchPanel = () => {
       setIsLoading(true);
 
       try {
-        // localStorage.setItem('lastPokemonSearch', inputValue.toLowerCase());
-
         if (!inputValue.trim()) {
           const allPokemons = await getAllPokemons();
           console.log('Input is empty. Found Pokemons:', allPokemons.results);
@@ -77,12 +74,8 @@ const SearchPanel = () => {
     savePokemon(event.target.value);
   };
 
-  if (isErrorBoundary) {
-    throw new Error('Special Error to Test ErrorBoundary');
-  }
-
   return (
-    <div>
+    <>
       <form className="form">
         <input
           className="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
@@ -113,14 +106,7 @@ const SearchPanel = () => {
         </h2>
       </div>
       {isLoading ? <Loader /> : <PokemonList data={searchResults} />}
-      <button
-        type="button"
-        onClick={() => setIsErrorBoundary(true)}
-        className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-      >
-        Error Button
-      </button>
-    </div>
+    </>
   );
 };
 
