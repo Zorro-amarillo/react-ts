@@ -1,8 +1,9 @@
-import PokemonService from '../../src/app/services/PokemonService/PokemonService';
+import usePokemonService from '../../src/app/services/usePokemonService/usePokemonService';
 
 describe('PokemonService', () => {
   const baseUrl = 'https://pokeapi.co/api/v2/pokemon';
   const mockedFetch = vi.fn();
+  const { getPokemonData, getAllPokemons, getPokemon } = usePokemonService();
 
   beforeEach(() => {
     global.fetch = mockedFetch;
@@ -32,8 +33,7 @@ describe('PokemonService', () => {
     });
     mockedFetch.mockResolvedValue(mockedResponse);
 
-    const pokemonService = new PokemonService();
-    const result = await pokemonService.getPokemonData(mockedUrl);
+    const result = await getPokemonData(mockedUrl);
 
     expect(result).toEqual({
       results: [
@@ -65,8 +65,7 @@ describe('PokemonService', () => {
     });
     mockedFetch.mockResolvedValue(mockedResponse);
 
-    const pokemonService = new PokemonService();
-    const result = await pokemonService.getAllPokemons(mockedPage);
+    const result = await getAllPokemons(mockedPage);
 
     expect(result).toEqual(mockedData);
     expect(mockedFetch).toHaveBeenCalledWith(
@@ -91,8 +90,7 @@ describe('PokemonService', () => {
     });
     mockedFetch.mockResolvedValue(mockedResponse);
 
-    const pokemonService = new PokemonService();
-    const result = await pokemonService.getPokemon(pokemonName);
+    const result = await getPokemon(pokemonName);
     const updatedResult = {
       ...result,
       url: `${baseUrl}/${mockedData.id}`,

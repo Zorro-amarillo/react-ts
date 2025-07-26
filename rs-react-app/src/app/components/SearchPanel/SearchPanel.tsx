@@ -1,12 +1,6 @@
 import './SearchPanel.css';
-import {
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-  type ChangeEvent,
-} from 'react';
-import PokemonService from '../../services/PokemonService/PokemonService';
+import { useCallback, useEffect, useState, type ChangeEvent } from 'react';
+import usePokemonService from '../../services/usePokemonService/usePokemonService';
 import PokemonList from '../PokemonList/PokemonList';
 import type { IPokemonData } from '../../../types/types';
 import Loader from '../Loader/Loader';
@@ -19,13 +13,13 @@ const SearchPanel = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isErrorBoundary, setIsErrorBoundary] = useState(false);
 
-  const pokemonService = useMemo(() => new PokemonService(), []);
+  const { getAllPokemons, getPokemon } = usePokemonService();
 
   const loadAllPokemons = useCallback(async () => {
     setIsLoading(true);
 
     try {
-      const data = await pokemonService.getAllPokemons();
+      const data = await getAllPokemons();
 
       setSearchResults(data.results);
       setIsLoading(false);
@@ -33,7 +27,7 @@ const SearchPanel = () => {
       setIsLoading(false);
       console.error(`SearchPanel.loadAllPokemons() failed: ${err}`);
     }
-  }, [pokemonService]);
+  }, [getAllPokemons]);
 
   const searchPokemon = useCallback(
     async (e?: React.MouseEvent<HTMLButtonElement>) => {
@@ -44,13 +38,13 @@ const SearchPanel = () => {
         localStorage.setItem('lastPokemonSearch', inputValue.toLowerCase());
 
         if (!inputValue.trim()) {
-          const allPokemons = await pokemonService.getAllPokemons();
+          const allPokemons = await getAllPokemons();
           console.log('Input is empty. Found Pokemons:', allPokemons.results);
 
           setSearchResults(allPokemons.results);
           setIsLoading(false);
         } else {
-          const pokemon = await pokemonService.getPokemon(inputValue);
+          const pokemon = await getPokemon(inputValue);
 
           setSearchResults([pokemon]);
           setIsLoading(false);
@@ -64,7 +58,7 @@ const SearchPanel = () => {
         console.error(`SearchPanel.searchPokemon() failed. ${err}`);
       }
     },
-    [inputValue, pokemonService]
+    [inputValue, getAllPokemons, getPokemon]
   );
 
   const loadStartData = useCallback(
