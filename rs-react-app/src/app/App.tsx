@@ -3,6 +3,7 @@ import SearchPanel from './components/SearchPanel/SearchPanel';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Page404 from './pages/Page404';
+import AboutPage from './pages/AboutPage';
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
             </ErrorBoundary>
           }
         />
+        <Route path="/about" element={<AboutPage />} />
         <Route path="*" element={<Page404 />} />
       </Routes>
     </Router>
