@@ -31,7 +31,7 @@ const AboutPage = () => {
           </a>{' '}
           to master modern frontend development.
         </p>
-        <BackToMainButton />
+        <BackToMainButton text="Back to Main Page" />
       </main>
       <Footer />
     </>

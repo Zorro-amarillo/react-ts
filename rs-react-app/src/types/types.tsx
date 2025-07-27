@@ -1,3 +1,9 @@
+export interface IPokemon {
+  sprites: { front_default: string | undefined };
+  height: number;
+  weight: number;
+}
+
 export interface IPokemonData {
   name: string;
   url: string;
@@ -22,4 +28,8 @@ export interface IErrorBoundaryState {
 export interface IServiceError {
   status: number;
   errorText: string;
+}
+
+export interface IBackToMainButtonProps {
+  text: string;
 }

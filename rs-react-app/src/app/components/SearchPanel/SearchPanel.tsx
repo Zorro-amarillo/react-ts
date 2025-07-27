@@ -5,7 +5,6 @@ import PokemonList from '../PokemonList/PokemonList';
 import type { IPokemonData } from '../../../types/types';
 import Loader from '../Loader/Loader';
 import useLocalStorage from '../../hooks/useLocalStorage';
-import Footer from '../Footer/Footer';
 
 const SearchPanel = () => {
   const [searchResults, setSearchResults] = useState<IPokemonData[]>([]);
@@ -53,7 +52,7 @@ const SearchPanel = () => {
         }
       } catch (err) {
         setIsLoading(false);
-        console.error(`SearchPanel.searchPokemon() failed. ${err}`);
+        console.error(`SearchPanel searchPokemon() failed. ${err}`);
       }
     },
     [inputValue, getAllPokemons, getPokemon]
@@ -101,15 +100,14 @@ const SearchPanel = () => {
         <h1 className="mb-4 mt-8 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl">
           Pokemon Search Results
         </h1>
-        <div className="search-results__title">
+        <div className="search-results__title mb-8">
           <h2 className="text-3xl font-extrabold text-gray-500">Pokemon</h2>
           <h2 className="text-3xl font-extrabold text-gray-500">
-            Link to Pokemon JSON
+            Link to Data
           </h2>
         </div>
         {isLoading ? <Loader /> : <PokemonList data={searchResults} />}
       </main>
-      <Footer />
     </>
   );
 };
