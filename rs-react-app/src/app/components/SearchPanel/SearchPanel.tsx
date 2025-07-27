@@ -5,6 +5,7 @@ import PokemonList from '../PokemonList/PokemonList';
 import type { IPokemonData } from '../../../types/types';
 import Loader from '../Loader/Loader';
 import useLocalStorage from '../../hooks/useLocalStorage';
+import Footer from '../Footer/Footer';
 
 const SearchPanel = () => {
   const [searchResults, setSearchResults] = useState<IPokemonData[]>([]);
@@ -18,7 +19,7 @@ const SearchPanel = () => {
     setIsLoading(true);
 
     try {
-      const data = await getAllPokemons();
+      const data = await getAllPokemons(1);
 
       setSearchResults(data.results);
       setIsLoading(false);
@@ -35,7 +36,7 @@ const SearchPanel = () => {
 
       try {
         if (!inputValue.trim()) {
-          const allPokemons = await getAllPokemons();
+          const allPokemons = await getAllPokemons(1);
           console.log('Input is empty. Found Pokemons:', allPokemons.results);
 
           setSearchResults(allPokemons.results);
@@ -76,36 +77,39 @@ const SearchPanel = () => {
 
   return (
     <>
-      <form className="form">
-        <input
-          className="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-          type="text"
-          placeholder="Enter Full Name or Id"
-          onChange={(e) => onInputValueChange(e)}
-          value={inputValue}
-        />
-        <button
-          onClick={searchPokemon}
-          className="text-white bg-gradient-to-r from-purple-500 to-pink-500
-            hover:bg-gradient-to-l focus:ring-4 focus:outline-none
-            focus:ring-purple-200 dark:focus:ring-purple-800
-            font-medium rounded-lg text-xs
-            px-4 py-2
-            whitespace-nowrap"
-        >
-          Search Pokemon
-        </button>
-      </form>
-      <h1 className="mb-4 mt-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl">
-        Pokemon Search Results
-      </h1>
-      <div className="search-results__title">
-        <h2 className="text-3xl font-extrabold text-gray-500">Pokemon</h2>
-        <h2 className="text-3xl font-extrabold text-gray-500">
-          Link to Pokemon JSON
-        </h2>
-      </div>
-      {isLoading ? <Loader /> : <PokemonList data={searchResults} />}
+      <main className="p-8 flex-grow">
+        <form className="form w-2/3 mx-auto">
+          <input
+            className="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            type="text"
+            placeholder="Enter Full Name or Id"
+            onChange={(e) => onInputValueChange(e)}
+            value={inputValue}
+          />
+          <button
+            onClick={searchPokemon}
+            className="text-white bg-gradient-to-r from-purple-500 to-pink-500
+              hover:bg-gradient-to-l focus:ring-4 focus:outline-none
+              focus:ring-purple-200 dark:focus:ring-purple-800
+              font-medium rounded-lg text-xs
+              px-4 py-2
+              whitespace-nowrap"
+          >
+            Search Pokemon
+          </button>
+        </form>
+        <h1 className="mb-4 mt-8 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl">
+          Pokemon Search Results
+        </h1>
+        <div className="search-results__title">
+          <h2 className="text-3xl font-extrabold text-gray-500">Pokemon</h2>
+          <h2 className="text-3xl font-extrabold text-gray-500">
+            Link to Pokemon JSON
+          </h2>
+        </div>
+        {isLoading ? <Loader /> : <PokemonList data={searchResults} />}
+      </main>
+      <Footer />
     </>
   );
 };
