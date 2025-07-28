@@ -44,7 +44,7 @@ const usePokemonService = () => {
 
   const getAllPokemons = useCallback(
     async (page = 1) => {
-      const pageLimit = 20;
+      const pageLimit = 10;
       const offset = (page - 1) * pageLimit;
       const urlToRender = `${allPokemonsUrl}?limit=${pageLimit}&offset=${offset}`;
 

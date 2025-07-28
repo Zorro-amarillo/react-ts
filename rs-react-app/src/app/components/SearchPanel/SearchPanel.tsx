@@ -11,7 +11,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 const SearchPanel = () => {
   const { page, pokemonName } = useParams();
   const currentPage = +(page ?? 1);
-  const pageLimit = 20;
+  const pageLimit = 10;
   const navigate = useNavigate();
 
   const [searchResults, setSearchResults] = useState<IPokemonData[]>([]);
