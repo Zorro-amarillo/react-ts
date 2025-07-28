@@ -11,6 +11,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 const SearchPanel = () => {
   const { page, pokemonName } = useParams();
   const currentPage = +(page ?? 1);
+  const pageLimit = 20;
   const navigate = useNavigate();
 
   const [searchResults, setSearchResults] = useState<IPokemonData[]>([]);
@@ -28,7 +29,7 @@ const SearchPanel = () => {
       const data = await getAllPokemons(currentPage);
 
       setSearchResults(data.results);
-      setTotalPages(Math.ceil(data.count / 20));
+      setTotalPages(Math.ceil(data.count / pageLimit));
       setIsLoading(false);
     } catch (err) {
       setIsLoading(false);
@@ -47,7 +48,7 @@ const SearchPanel = () => {
           console.log('Input is empty. Found Pokemons:', allPokemons.results);
 
           setSearchResults(allPokemons.results);
-          setTotalPages(Math.ceil(allPokemons.count / 20));
+          setTotalPages(Math.ceil(allPokemons.count / pageLimit));
           setIsLoading(false);
         } else {
           const pokemon = await getPokemon(inputValue);
