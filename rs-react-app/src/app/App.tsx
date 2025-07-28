@@ -22,7 +22,7 @@ const App = () => {
           }
         />
         <Route path="/about" element={<AboutPage />} />
-        <Route path={`/pokemons`} element={<SearchPage />}>
+        <Route path={'/:page'} element={<SearchPage />}>
           <Route path={`:pokemonName`} element={<PokemonDetails />} />
         </Route>
         <Route path="/404" element={<Page404 />} />

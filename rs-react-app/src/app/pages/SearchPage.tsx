@@ -1,29 +1,23 @@
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import SearchPanel from '../components/SearchPanel/SearchPanel';
-import Footer from '../components/Footer/Footer';
+import { useParams } from 'react-router-dom';
 
 const SearchPage = () => {
-  const location = useLocation();
-  const isOutlet = location.pathname.includes('/pokemons/');
+  const { pokemonName } = useParams();
+  const isOutlet = pokemonName ? true : false;
 
   return (
-    <>
+    <div className="flex h-screen w-full">
+      <div className={`${isOutlet ? 'w-1/2' : 'w-full'} overflow-y-auto`}>
+        <SearchPanel />
+      </div>
+
       {isOutlet ? (
-        <div className="flex h-full min-h-screen">
-          <div className="w-1/2">
-            <SearchPanel />
-          </div>
-          <div className="w-1/2 bg-yellow-100 p-8 pt-10">
-            <Outlet />
-          </div>
+        <div className="w-1/2 bg-yellow-100 p-8">
+          <Outlet />
         </div>
-      ) : (
-        <div className="flex flex-col w-full h-full min-h-screen">
-          <SearchPanel />
-        </div>
-      )}
-      <Footer />
-    </>
+      ) : null}
+    </div>
   );
 };
 

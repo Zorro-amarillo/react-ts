@@ -11,10 +11,12 @@ export interface IPokemonData {
 
 export interface IPokemonProps {
   pokemonData: IPokemonData;
+  page: number;
 }
 
 export interface IPokemonListProps {
   data: (IPokemonData | null)[];
+  currentPage: number;
 }
 
 export interface IErrorBoundaryProps {
@@ -32,4 +34,10 @@ export interface IServiceError {
 
 export interface IBackToMainButtonProps {
   text: string;
+}
+
+export interface IPaginationProps {
+  page: number;
+  totalPages: number;
+  onPageChange: (newPage: number) => void;
 }

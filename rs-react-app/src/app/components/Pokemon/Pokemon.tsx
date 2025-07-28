@@ -2,7 +2,7 @@ import type { IPokemonProps } from '../../../types/types';
 import { Link } from 'react-router-dom';
 
 const Pokemon = (props: IPokemonProps) => {
-  const { pokemonData } = props;
+  const { pokemonData, page } = props;
   const { name, url } = pokemonData;
 
   return (
@@ -21,7 +21,7 @@ const Pokemon = (props: IPokemonProps) => {
       "
     >
       <Link
-        to={`/pokemons/${name}`}
+        to={`/${page}/${name}`}
         className="flex flex-wrap items-center gap-4 w-full justify-center"
       >
         <p className="text-gray-500 flex-shrink-0">{`${name[0].toUpperCase()}${name.slice(1)}`}</p>

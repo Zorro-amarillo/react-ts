@@ -4,7 +4,7 @@ import type { IPokemonListProps } from '../../../types/types';
 import Pokemon from '../Pokemon/Pokemon';
 
 const PokemonList = (props: IPokemonListProps) => {
-  const { data } = props;
+  const { data, currentPage } = props;
 
   const pokemonElements = data.map((pokemon, index) => {
     if (!pokemon) {
@@ -22,7 +22,7 @@ const PokemonList = (props: IPokemonListProps) => {
 
     return (
       <ErrorBoundary key={`error-boundary-${index}`}>
-        <Pokemon key={index} pokemonData={pokemon} />
+        <Pokemon key={index} pokemonData={pokemon} page={currentPage} />
       </ErrorBoundary>
     );
   });
