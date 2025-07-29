@@ -22,7 +22,12 @@ const PokemonList = (props: IPokemonListProps) => {
 
     return (
       <ErrorBoundary key={`error-boundary-${index}`}>
-        <Pokemon key={index} pokemonData={pokemon} page={currentPage} />
+        <Pokemon
+          key={index}
+          pokemonData={pokemon}
+          page={currentPage}
+          data-testid="pokemon-item"
+        />
       </ErrorBoundary>
     );
   });
