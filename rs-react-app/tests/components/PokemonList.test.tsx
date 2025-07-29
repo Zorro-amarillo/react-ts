@@ -44,7 +44,7 @@ describe('PokemonList', () => {
   });
 
   it('should not crash when receiving unexpected empty array', () => {
-    render(<PokemonList data={[]} />);
+    render(<PokemonList data={[]} currentPage={5} />);
 
     const list = screen.getByRole('list');
 
@@ -55,7 +55,7 @@ describe('PokemonList', () => {
   it('should render error message for invalid Pokemon data', () => {
     const mockedData = [null];
 
-    render(<PokemonList data={mockedData} />);
+    render(<PokemonList data={mockedData} currentPage={7} />);
 
     expect(screen.getByText('⚠️ Invalid Pokemon Data ⚠️')).toBeInTheDocument();
     expect(
