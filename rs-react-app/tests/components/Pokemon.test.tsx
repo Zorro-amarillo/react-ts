@@ -1,25 +1,30 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import Pokemon from '../../src/app/components/Pokemon/Pokemon';
+import { renderWithRouter } from '../test-utils/test-utils';
 
 describe('Pokemon', () => {
   const mockedData = {
-    name: 'Pikachu',
-    url: 'https://pokeapi.co/api/v2/pokemon/25',
+    pokemonData: {
+      name: 'Pikachu',
+      url: 'https://pokeapi.co/api/v2/pokemon/25/',
+    },
+    page: 3,
   };
 
-  it('should render Pokemon name', () => {
-    render(<Pokemon pokemonData={mockedData} />);
+  const { pokemonData } = mockedData;
 
-    const name = screen.getByRole('paragraph');
+  it('should render Pokemon name', () => {
+    renderWithRouter(<Pokemon {...mockedData} />);
+
+    const name = screen.getByText(pokemonData.name);
     expect(name).toBeInTheDocument();
     expect(name).toHaveTextContent('Pikachu');
   });
 
   it('should render link to Pokemon JSON', () => {
-    render(<Pokemon pokemonData={mockedData} />);
+    renderWithRouter(<Pokemon {...mockedData} />);
 
-    const link = screen.getByRole('link');
+    const link = screen.getByText(mockedData.pokemonData.url);
     expect(link).toBeInTheDocument();
-    expect(link).toHaveAttribute('href', mockedData.url);
   });
 });

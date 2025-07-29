@@ -1,23 +1,24 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import SearchPanel from '../../src/app/components/SearchPanel/SearchPanel';
+import { renderWithRouter } from '../test-utils/test-utils';
 
 describe('SearchPanel', () => {
   it('should render SearchPanel with Pokemon input', () => {
-    render(<SearchPanel />);
+    renderWithRouter(<SearchPanel />);
 
     expect(screen.getByPlaceholderText(/enter/i)).toBeInTheDocument();
   });
 
   it('should render SearchPanel with search Pokemon button', () => {
-    render(<SearchPanel />);
+    renderWithRouter(<SearchPanel />);
 
     expect(screen.getByRole('button', { name: /search/i })).toBeInTheDocument();
   });
 
   it('should render SearchPanel with saved search term from localStorage on mount', () => {
     localStorage.setItem('lastPokemonSearch', 'pikachu');
-    render(<SearchPanel />);
+    renderWithRouter(<SearchPanel />);
 
     const input = screen.getByPlaceholderText('Enter Full Name or Id');
 
@@ -28,7 +29,7 @@ describe('SearchPanel', () => {
 
   it('should show SearchPanel empty input, when no saved term in localStorage exists', () => {
     localStorage.removeItem('lastPokemonSearch');
-    render(<SearchPanel />);
+    renderWithRouter(<SearchPanel />);
 
     const input = screen.getByPlaceholderText('Enter Full Name or Id');
 
@@ -38,7 +39,7 @@ describe('SearchPanel', () => {
   });
 
   it('should update Pokemon input value on change', async () => {
-    render(<SearchPanel />);
+    renderWithRouter(<SearchPanel />);
 
     const input = screen.getByPlaceholderText('Enter Full Name or Id');
 
