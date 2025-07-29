@@ -94,7 +94,7 @@ const SearchPanel = () => {
   };
 
   return (
-    <div className="w-full p-8">
+    <div className="w-full p-8" data-testid="search-panel">
       <form className="form w-2/3 mx-auto">
         <input
           className="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"

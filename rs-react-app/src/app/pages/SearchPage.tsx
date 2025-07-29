@@ -8,7 +8,7 @@ const SearchPage = () => {
   const isOutlet = pokemonName ? true : false;
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen" data-testid="search-page">
       <div className="flex flex-1">
         <div className={`${isOutlet ? 'w-1/2' : 'w-full'}`}>
           <SearchPanel />
