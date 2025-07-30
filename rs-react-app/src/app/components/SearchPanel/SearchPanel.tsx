@@ -27,15 +27,22 @@ const SearchPanel = () => {
 
     try {
       const data = await getAllPokemons(currentPage);
+      const lastPage = Math.ceil(data.count / pageLimit);
+
+      if (currentPage > lastPage) {
+        navigate('/page404', { replace: true });
+        return;
+      }
 
       setSearchResults(data.results);
-      setTotalPages(Math.ceil(data.count / pageLimit));
-      setIsLoading(false);
+      setTotalPages(lastPage);
     } catch (err) {
-      setIsLoading(false);
       console.error(`SearchPanel.loadAllPokemons() failed: ${err}`);
+      navigate('/page404', { replace: true });
+    } finally {
+      setIsLoading(false);
     }
-  }, [getAllPokemons, currentPage]);
+  }, [getAllPokemons, currentPage, navigate]);
 
   const searchPokemon = useCallback(
     async (e?: React.MouseEvent<HTMLButtonElement>) => {
@@ -49,21 +56,20 @@ const SearchPanel = () => {
 
           setSearchResults(allPokemons.results);
           setTotalPages(Math.ceil(allPokemons.count / pageLimit));
-          setIsLoading(false);
         } else {
           const pokemon = await getPokemon(inputValue);
 
           setSearchResults([pokemon]);
           setTotalPages(1);
-          setIsLoading(false);
 
           if (pokemon !== undefined) {
             console.log('Found Pokemon:', pokemon);
           }
         }
       } catch (err) {
-        setIsLoading(false);
         console.error(`SearchPanel searchPokemon() failed. ${err}`);
+      } finally {
+        setIsLoading(false);
       }
     },
     [inputValue, getAllPokemons, getPokemon, currentPage]
@@ -78,8 +84,13 @@ const SearchPanel = () => {
   }, [inputValue, loadAllPokemons, searchPokemon]);
 
   useEffect(() => {
+    if (!Number.isInteger(currentPage) || currentPage < 1) {
+      navigate('/page404', { replace: true });
+      return;
+    }
+
     loadStartData();
-  }, [loadStartData]);
+  }, [currentPage, navigate, loadStartData]);
 
   const onInputValueChange = (event: ChangeEvent<HTMLInputElement>) => {
     savePokemon(event.target.value);

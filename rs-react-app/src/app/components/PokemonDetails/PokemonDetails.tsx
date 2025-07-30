@@ -32,7 +32,7 @@ const PokemonDetails = () => {
       } catch (err) {
         console.error(`PokemonDetails useEffect error: ${err}`);
         setPokemonData(null);
-        navigate('/404');
+        navigate('/page404', { replace: true });
       } finally {
         setIsLoading(false);
       }

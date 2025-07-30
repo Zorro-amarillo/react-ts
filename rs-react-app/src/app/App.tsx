@@ -22,10 +22,10 @@ const App = () => {
           }
         />
         <Route path="/about" element={<AboutPage />} />
-        <Route path={'/:page'} element={<SearchPage />}>
-          <Route path={`:pokemonName`} element={<PokemonDetails />} />
+        <Route path="/:page" element={<SearchPage />}>
+          <Route path=":pokemonName" element={<PokemonDetails />} />
         </Route>
-        <Route path="/404" element={<Page404 />} />
+        <Route path="/page404" element={<Page404 />} />
         <Route path="*" element={<Page404 />} />
       </Routes>
     </Router>
