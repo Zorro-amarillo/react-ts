@@ -1,7 +1,7 @@
-import { screen, render } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
+import { render, screen } from '@testing-library/react';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
+
 import PokemonDetails from '../../src/app/components/PokemonDetails/PokemonDetails';
-import { Routes, Route } from 'react-router-dom';
 
 describe('PokemonDetails', () => {
   it('should render Pokemon name', async () => {

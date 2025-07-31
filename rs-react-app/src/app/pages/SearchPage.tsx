@@ -1,7 +1,7 @@
-import { Outlet } from 'react-router-dom';
-import SearchPanel from '../components/SearchPanel/SearchPanel';
-import { useParams } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
+
 import Footer from '../components/Footer/Footer';
+import SearchPanel from '../components/SearchPanel/SearchPanel';
 
 const SearchPage = () => {
   const { pokemonName } = useParams();

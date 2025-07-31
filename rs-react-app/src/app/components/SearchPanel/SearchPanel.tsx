@@ -1,12 +1,15 @@
-import './SearchPanel.css';
 import { useCallback, useEffect, useState, type ChangeEvent } from 'react';
-import usePokemonService from '../../services/usePokemonService/usePokemonService';
-import PokemonList from '../PokemonList/PokemonList';
-import type { IPokemonData } from '../../../types/types';
-import Loader from '../Loader/Loader';
+import { useNavigate, useParams } from 'react-router-dom';
+
+import './SearchPanel.css';
+
 import useLocalStorage from '../../hooks/useLocalStorage';
+import usePokemonService from '../../services/usePokemonService/usePokemonService';
+import Loader from '../Loader/Loader';
 import Pagination from '../Pagination/Pagination';
-import { useParams, useNavigate } from 'react-router-dom';
+import PokemonList from '../PokemonList/PokemonList';
+
+import type { IPokemonData } from '../../../types/types';
 
 const SearchPanel = () => {
   const { page, pokemonName } = useParams();
@@ -138,11 +141,7 @@ const SearchPanel = () => {
       ) : (
         <>
           <PokemonList data={searchResults} currentPage={currentPage} />
-          <Pagination
-            page={currentPage}
-            totalPages={totalPages}
-            onPageChange={changePage}
-          />
+          <Pagination page={currentPage} totalPages={totalPages} onPageChange={changePage} />
         </>
       )}
     </div>

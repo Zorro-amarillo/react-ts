@@ -1,5 +1,6 @@
-import type { IPokemonProps } from '../../../types/types';
 import { Link } from 'react-router-dom';
+
+import type { IPokemonProps } from '../../../types/types';
 
 const Pokemon = (props: IPokemonProps) => {
   const { pokemonData, page } = props;

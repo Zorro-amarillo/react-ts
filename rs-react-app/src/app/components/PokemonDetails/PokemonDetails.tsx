@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+
 import usePokemonService from '../../services/usePokemonService/usePokemonService';
 import BackToMainButton from '../BackToMainButton/BackToMainButton';
 import Loader from '../Loader/Loader';
+
 import type { IPokemon } from '../../../types/types';
-import { useNavigate } from 'react-router-dom';
 
 const PokemonDetails = () => {
   const { pokemonName } = useParams();
@@ -42,9 +43,7 @@ const PokemonDetails = () => {
   }, [getPokemon, pokemonName, navigate]);
 
   if (!pokemonName) {
-    return (
-      <p className="text-red-500 text-center mt-10">Invalid Pokemon name</p>
-    );
+    return <p className="text-red-500 text-center mt-10">Invalid Pokemon name</p>;
   }
 
   if (isLoading) {
@@ -69,11 +68,7 @@ const PokemonDetails = () => {
       ) : (
         <>
           <h3 className="text-gray-900 mt-10">{`${pokemonName[0].toUpperCase()}${pokemonName?.slice(1)}`}</h3>
-          <img
-            src={pokemonData.sprites.front_default}
-            alt="Pokemon Image"
-            className="mx-auto"
-          />
+          <img src={pokemonData.sprites.front_default} alt="Pokemon Image" className="mx-auto" />
           <p className="text-gray-500">{`Height: ${pokemonData.height}`}</p>
           <p className="text-gray-500">{`Weight: ${pokemonData.weight}`}</p>
         </>

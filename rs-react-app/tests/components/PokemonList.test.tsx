@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+
 import PokemonList from '../../src/app/components/PokemonList/PokemonList';
 import { renderWithRouter } from '../test-utils/test-utils';
 
@@ -29,9 +30,7 @@ describe('PokemonList', () => {
 
   it('should render one Pokemon, when there is only one Pokemon in the provided data', () => {
     const mockData = [{ name: 'pikachu', url: 'pikachu-url' }];
-    const { container } = renderWithRouter(
-      <PokemonList data={mockData} currentPage={3} />
-    );
+    const { container } = renderWithRouter(<PokemonList data={mockData} currentPage={3} />);
 
     const list = container.querySelector('ul');
     expect(list?.children).toHaveLength(mockData.length);
@@ -58,8 +57,6 @@ describe('PokemonList', () => {
     render(<PokemonList data={mockedData} currentPage={7} />);
 
     expect(screen.getByText('⚠️ Invalid Pokemon Data ⚠️')).toBeInTheDocument();
-    expect(
-      screen.getByText('Please Enter Full Name or Id')
-    ).toBeInTheDocument();
+    expect(screen.getByText('Please Enter Full Name or Id')).toBeInTheDocument();
   });
 });

@@ -1,6 +1,7 @@
+import { screen } from '@testing-library/react';
+
 import SearchPage from '../../src/app/pages/SearchPage';
 import { renderWithRouter } from '../test-utils/test-utils';
-import { screen } from '@testing-library/react';
 
 describe('SearchPage', () => {
   it('should render SearchPanel and Footer', () => {

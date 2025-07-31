@@ -1,5 +1,6 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+
 import SearchPanel from '../../src/app/components/SearchPanel/SearchPanel';
 import { renderWithRouter } from '../test-utils/test-utils';
 

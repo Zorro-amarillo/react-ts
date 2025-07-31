@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+
 import type { IServiceError } from '../../../types/types';
 
 class ServiceError extends Error implements IServiceError {
@@ -34,9 +35,7 @@ const usePokemonService = () => {
     } catch (err) {
       if (err instanceof Error) {
         if ('status' in err && 'errorText' in err) {
-          console.error(
-            `${err}. Status: ${err.status}. Error text: ${err.errorText}`
-          );
+          console.error(`${err}. Status: ${err.status}. Error text: ${err.errorText}`);
         }
       }
     }
