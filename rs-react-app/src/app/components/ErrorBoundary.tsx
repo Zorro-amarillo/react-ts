@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import type { ErrorInfo } from 'react';
 
-import type { IErrorBoundaryProps, IErrorBoundaryState } from '../../../types/types';
+import type { IErrorBoundaryProps, IErrorBoundaryState } from '../../types/types';
 
 class ErrorBoundary extends Component<IErrorBoundaryProps, IErrorBoundaryState> {
   state = {
