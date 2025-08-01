@@ -1,7 +1,7 @@
 import './PokemonList.css';
 
-import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
-import Pokemon from '../Pokemon/Pokemon';
+import ErrorBoundary from '../ErrorBoundary';
+import Pokemon from '../Pokemon';
 
 import type { IPokemonListProps } from '../../../types/types';
 

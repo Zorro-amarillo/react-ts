@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import usePokemonService from '../../services/usePokemonService/usePokemonService';
-import BackToMainButton from '../BackToMainButton/BackToMainButton';
-import Loader from '../Loader/Loader';
+import BackToMainButton from './BackToMainButton';
+import Loader from './Loader';
+import usePokemonService from '../services/usePokemonService';
 
-import type { IPokemon } from '../../../types/types';
+import type { IPokemon } from '../../types/types';
 
 const PokemonDetails = () => {
   const { pokemonName } = useParams();

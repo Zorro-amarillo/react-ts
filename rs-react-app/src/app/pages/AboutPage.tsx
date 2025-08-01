@@ -1,5 +1,5 @@
-import BackToMainButton from '../components/BackToMainButton/BackToMainButton';
-import Footer from '../components/Footer/Footer';
+import BackToMainButton from '../components/BackToMainButton';
+import Footer from '../components/Footer';
 
 const AboutPage = () => {
   return (

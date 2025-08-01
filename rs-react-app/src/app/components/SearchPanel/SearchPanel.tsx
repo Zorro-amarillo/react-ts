@@ -4,9 +4,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import './SearchPanel.css';
 
 import useLocalStorage from '../../hooks/useLocalStorage';
-import usePokemonService from '../../services/usePokemonService/usePokemonService';
-import Loader from '../Loader/Loader';
-import Pagination from '../Pagination/Pagination';
+import usePokemonService from '../../services/usePokemonService';
+import Loader from '../Loader';
+import Pagination from '../Pagination';
 import PokemonList from '../PokemonList/PokemonList';
 
 import type { IPokemonData } from '../../../types/types';

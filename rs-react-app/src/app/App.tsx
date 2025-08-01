@@ -2,9 +2,9 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
 import './App.css';
 
-import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
-import Footer from './components/Footer/Footer';
-import PokemonDetails from './components/PokemonDetails/PokemonDetails';
+import ErrorBoundary from './components/ErrorBoundary';
+import Footer from './components/Footer';
+import PokemonDetails from './components/PokemonDetails';
 import SearchPanel from './components/SearchPanel/SearchPanel';
 import AboutPage from './pages/AboutPage';
 import Page404 from './pages/Page404';

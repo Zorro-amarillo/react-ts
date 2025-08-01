@@ -1,5 +1,5 @@
 import page404 from '../../assets/page404.png';
-import BackToMainButton from '../components/BackToMainButton/BackToMainButton';
+import BackToMainButton from '../components/BackToMainButton';
 
 const Page404 = () => {
   return (
