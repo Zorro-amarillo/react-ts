@@ -1,3 +1,5 @@
+import React from 'react';
+
 export interface IPokemon {
   sprites: { front_default: string | undefined };
   height: number;
