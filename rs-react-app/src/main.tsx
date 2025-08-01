@@ -5,14 +5,18 @@ import './index.css';
 
 import App from './app/App.tsx';
 
-const root = document.getElementById('root');
+let root = document.getElementById('root');
 
-if (root) {
-  createRoot(root).render(
-    <StrictMode>
-      <App />
-    </StrictMode>
-  );
-
-  root.className = 'flex flex-col min-w-full max-w-[1440px] min-h-screen my-0 mx-auto text-center';
+if (!root) {
+  root = document.createElement('div');
+  root.id = 'root';
+  document.body.appendChild(root);
 }
+
+createRoot(root).render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);
+
+root.className = 'flex flex-col min-w-full max-w-[1440px] min-h-screen my-0 mx-auto text-center';
