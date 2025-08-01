@@ -1,15 +1,13 @@
 import { useCallback, useEffect, useState, type ChangeEvent } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import './SearchPanel.css';
+import Loader from './Loader';
+import Pagination from './Pagination';
+import PokemonList from './PokemonList';
+import useLocalStorage from '../hooks/useLocalStorage';
+import usePokemonService from '../services/usePokemonService';
 
-import useLocalStorage from '../../hooks/useLocalStorage';
-import usePokemonService from '../../services/usePokemonService';
-import Loader from '../Loader';
-import Pagination from '../Pagination';
-import PokemonList from '../PokemonList/PokemonList';
-
-import type { IPokemonData } from '../../../types/types';
+import type { IPokemonData } from '../../types/types';
 
 const SearchPanel = () => {
   const { page, pokemonName } = useParams();
@@ -109,9 +107,9 @@ const SearchPanel = () => {
 
   return (
     <div className="w-full p-8" data-testid="search-panel">
-      <form className="form w-2/3 mx-auto">
+      <form className="form flex justify-center items-center w-2/3 mx-auto">
         <input
-          className="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          className="input min-w-52 h-10 mr-2.5 border-r-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           type="text"
           placeholder="Enter Full Name or Id"
           onChange={(e) => onInputValueChange(e)}
@@ -119,7 +117,7 @@ const SearchPanel = () => {
         />
         <button
           onClick={searchPokemon}
-          className="text-white bg-gradient-to-r from-purple-500 to-pink-500
+          className="btn h-10 text-white bg-gradient-to-r from-purple-500 to-pink-500
               hover:bg-gradient-to-l focus:ring-4 focus:outline-none
               focus:ring-purple-200 dark:focus:ring-purple-800
               font-medium rounded-lg text-xs
@@ -129,10 +127,10 @@ const SearchPanel = () => {
           Search Pokemon
         </button>
       </form>
-      <h1 className="mb-4 mt-8 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl">
+      <h1 className="mb-4 mt-8 text-4xl font-extrabold leading-none tracking-tight md:text-5xl lg:text-6xl">
         Pokemon Search Results
       </h1>
-      <div className="search-results__title mb-8">
+      <div className="search-results__title mb-8 flex justify-evenly">
         <h2 className="text-3xl font-extrabold text-gray-500">Pokemon</h2>
         <h2 className="text-3xl font-extrabold text-gray-500">Link to Data</h2>
       </div>

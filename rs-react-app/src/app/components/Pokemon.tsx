@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import type { IPokemonProps } from '../../../types/types';
+import type { IPokemonProps } from '../../types/types';
 
 const Pokemon = (props: IPokemonProps) => {
   const { pokemonData, page } = props;
@@ -19,6 +19,7 @@ const Pokemon = (props: IPokemonProps) => {
       mb-1
       hover:shadow-sm
       justify-center
+      gap-5
       "
     >
       <Link

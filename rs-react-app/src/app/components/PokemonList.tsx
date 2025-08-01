@@ -1,9 +1,7 @@
-import './PokemonList.css';
+import ErrorBoundary from './ErrorBoundary';
+import Pokemon from './Pokemon';
 
-import ErrorBoundary from '../ErrorBoundary';
-import Pokemon from '../Pokemon';
-
-import type { IPokemonListProps } from '../../../types/types';
+import type { IPokemonListProps } from '../../types/types';
 
 const PokemonList = (props: IPokemonListProps) => {
   const { data, currentPage } = props;
@@ -25,7 +23,7 @@ const PokemonList = (props: IPokemonListProps) => {
     );
   });
 
-  return <ul className="search-results">{pokemonElements}</ul>;
+  return <ul className="search-results ps-0">{pokemonElements}</ul>;
 };
 
 export default PokemonList;

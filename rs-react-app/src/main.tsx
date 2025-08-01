@@ -13,4 +13,6 @@ if (root) {
       <App />
     </StrictMode>
   );
+
+  root.className = 'flex flex-col min-w-full max-w-[1440px] min-h-screen my-0 mx-auto text-center';
 }
