@@ -1,69 +1,47 @@
-# React + TypeScript + Vite
+# RSSchool React Learning Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[GitHub Repository](https://github.com/Zorro-amarillo/react-ts)
 
-Currently, two official plugins are available:
+A practical React training project demonstrating fundamental concepts through component implementation.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🔍 Project Overview
 
-## Expanding the ESLint configuration
+- 🏗️ **Class Components. Error boundary**: Implement class components and error boundary to catch app errors
+- 🧪 **Unit Testing**: Component testing with Vitest + React Testing Library to ensure reliability
+- ⚛️ **Hooks and Routing**: Convert class components to hooks and implement navigation
+- ♻️ **State Management and Context API**: Manage state for selected items and theme switching
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠️ Technology Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+- **Сore**: React + TypeScript
+- **Bundler**: Vite
+- **Testing**: Vitest + React Testing Library
+- **Styling**: Tailwind CSS
+- **Linting**: ESLint + Prettier
+- **Git Hooks**: Husky
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🚀 Getting Started
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
+1. Clone repository:
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
+`git clone https://github.com/Zorro-amarillo/react-ts.git`
+
+2. Go to folder rs-react-app:
+
+`cd rs-react-app`
+
+3. Install dependencies:
+
+`npm install`
+
+4. Launch development server:
+
+`npm run dev`
+
+5. Open in browser:
+
+App will be available at `http://localhost:5173`
