@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import SearchPanel from '../../src/components/SearchPanel';
+import { SearchPanel } from '../../src/components';
 import { renderWithRouter } from '../test-utils/test-utils';
 
 describe('SearchPanel', () => {

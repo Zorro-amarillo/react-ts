@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
-import PokemonDetails from '../../src/components/PokemonDetails';
+import { PokemonDetails } from '../../src/components';
 
 describe('PokemonDetails', () => {
   it('should render Pokemon name', async () => {

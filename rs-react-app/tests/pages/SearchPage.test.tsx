@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react';
 
-import SearchPage from '../../src/pages/SearchPage';
+import { SearchPage } from '../../src/pages';
 import { renderWithRouter } from '../test-utils/test-utils';
 
 describe('SearchPage', () => {

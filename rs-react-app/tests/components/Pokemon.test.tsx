@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react';
 
-import Pokemon from '../../src/components/Pokemon';
+import { Pokemon } from '../../src/components';
 import { renderWithRouter } from '../test-utils/test-utils';
 
 describe('Pokemon', () => {
