@@ -7,7 +7,7 @@ import PokemonList from './PokemonList';
 import useLocalStorage from '../hooks/useLocalStorage';
 import usePokemonService from '../services/usePokemonService';
 
-import type { IPokemonData } from '../../types/types';
+import type { IPokemonData } from '../types';
 
 const SearchPanel = () => {
   const { page, pokemonName } = useParams();

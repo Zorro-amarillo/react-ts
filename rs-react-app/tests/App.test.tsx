@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import App from '../src/app/App';
+import App from '../src/App';
 
 describe('App', () => {
   it('should render App with no errors', () => {

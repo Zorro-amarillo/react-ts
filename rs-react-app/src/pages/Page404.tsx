@@ -1,4 +1,4 @@
-import page404 from '../../assets/page404.png';
+import page404 from '../assets/page404.png';
 import BackToMainButton from '../components/BackToMainButton';
 
 const Page404 = () => {

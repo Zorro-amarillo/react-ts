@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import Pagination from '../../src/app/components/Pagination';
+import Pagination from '../../src/components/Pagination';
 
 describe('Pagination', () => {
   const mockOnPageChange = vi.fn();

@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import type { IServiceError } from '../../types/types';
+import type { IServiceError } from '../types';
 
 class ServiceError extends Error implements IServiceError {
   status: number;

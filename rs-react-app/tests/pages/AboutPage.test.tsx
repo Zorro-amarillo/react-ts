@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react';
 
-import AboutPage from '../../src/app/pages/AboutPage';
+import AboutPage from '../../src/pages/AboutPage';
 import { renderWithRouter } from '../test-utils/test-utils';
 
 describe('AboutPage', () => {

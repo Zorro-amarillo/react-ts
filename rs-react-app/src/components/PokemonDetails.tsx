@@ -5,7 +5,7 @@ import BackToMainButton from './BackToMainButton';
 import Loader from './Loader';
 import usePokemonService from '../services/usePokemonService';
 
-import type { IPokemon } from '../../types/types';
+import type { IPokemon } from '../types';
 
 const PokemonDetails = () => {
   const { pokemonName } = useParams();

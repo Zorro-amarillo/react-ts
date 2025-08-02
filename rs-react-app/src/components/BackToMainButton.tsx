@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import type { IBackToMainButtonProps } from '../../types/types';
+import type { IBackToMainButtonProps } from '../types';
 
 const BackToMainButton = ({ text }: IBackToMainButtonProps) => {
   return (
