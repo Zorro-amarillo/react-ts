@@ -7,3 +7,5 @@ export { default as Pokemon } from './Pokemon';
 export { default as PokemonDetails } from './PokemonDetails';
 export { default as PokemonList } from './PokemonList';
 export { default as SearchPanel } from './SearchPanel';
+export { default as SearchForm } from './SearchForm';
+export { default as SearchResultsHeader } from './SearchResultsHeader';

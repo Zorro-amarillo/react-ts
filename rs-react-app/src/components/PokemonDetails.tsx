@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import BackToMainButton from './BackToMainButton';
-import Loader from './Loader';
+import { BackToMainButton, Loader } from './';
+
 import usePokemonService from '../services/usePokemonService';
 
 import type { IPokemon } from '../types';
