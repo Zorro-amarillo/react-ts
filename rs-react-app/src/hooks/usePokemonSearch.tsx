@@ -7,7 +7,7 @@ import useLocalStorage from '../hooks/useLocalStorage';
 import usePokemonService from '../services/usePokemonService';
 import { PAGE_LIMIT } from '../utils/constants';
 
-import type { IPokemonData } from '../types';
+import type { IPokemonData } from '../utils/types';
 
 const usePokemonSearch = () => {
   const navigate = useNavigate();

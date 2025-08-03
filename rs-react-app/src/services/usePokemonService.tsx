@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 
 import { PAGE_LIMIT, BASE_URL } from '../utils/constants';
 
-import type { IServiceError } from '../types';
+import type { IServiceError } from '../utils/types';
 
 class ServiceError extends Error implements IServiceError {
   status: number;
