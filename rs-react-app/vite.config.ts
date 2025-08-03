@@ -1,11 +1,19 @@
 /// <reference types="vitest" />
-import { defineConfig } from 'vite';
+import autoprefixer from 'autoprefixer';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite';
+import path from 'path';
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+      '@components': path.resolve(__dirname, './src/components'),
+    },
+  },
   test: {
     globals: true,
     environment: 'jsdom',
@@ -30,6 +38,11 @@ export default defineConfig({
           lines: 50,
         },
       },
+    },
+  },
+  css: {
+    postcss: {
+      plugins: [autoprefixer()],
     },
   },
 });

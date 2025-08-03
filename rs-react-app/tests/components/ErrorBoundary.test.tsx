@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import ErrorBoundary from '../../src/app/components/ErrorBoundary/ErrorBoundary';
+
+import { ErrorBoundary } from '../../src/components';
 
 describe('ErrorBoundary', () => {
   it('should render content when no error', () => {
@@ -28,9 +29,7 @@ describe('ErrorBoundary', () => {
 
     expect(screen.getByText(/something went wrong/i)).toBeInTheDocument();
     expect(screen.getByText(/Please Try Again/i)).toBeInTheDocument();
-    expect(
-      screen.getByRole('button', { name: /Try Again/i })
-    ).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Try Again/i })).toBeInTheDocument();
 
     vi.restoreAllMocks();
   });

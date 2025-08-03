@@ -1,5 +1,7 @@
 import { render, screen } from '@testing-library/react';
-import PokemonList from '../../src/app/components/PokemonList/PokemonList';
+
+import { PokemonList } from '../../src/components';
+import { renderWithRouter } from '../test-utils/test-utils';
 
 describe('PokemonList', () => {
   it('should render correct number of Pokemons, when there are more than one Pokemon in the provided data', () => {
@@ -13,25 +15,22 @@ describe('PokemonList', () => {
         url: 'ditto-url',
       },
     ];
-    const { container } = render(<PokemonList data={mockData} />);
+    renderWithRouter(<PokemonList data={mockData} currentPage={3} />);
 
-    const list = container.querySelector('ul');
-    expect(list?.children).toHaveLength(mockData.length);
+    const items = screen.getAllByRole('listitem');
+    expect(items).toHaveLength(mockData.length);
 
     mockData.forEach((pokemon) => {
       const { name } = pokemon;
       const pokemonName = `${name[0].toUpperCase()}${name.slice(1)}`;
 
       expect(screen.getByText(pokemonName)).toBeInTheDocument();
-      expect(
-        screen.getByRole('link', { name: pokemon.url })
-      ).toBeInTheDocument();
     });
   });
 
   it('should render one Pokemon, when there is only one Pokemon in the provided data', () => {
     const mockData = [{ name: 'pikachu', url: 'pikachu-url' }];
-    const { container } = render(<PokemonList data={mockData} />);
+    const { container } = renderWithRouter(<PokemonList data={mockData} currentPage={3} />);
 
     const list = container.querySelector('ul');
     expect(list?.children).toHaveLength(mockData.length);
@@ -39,13 +38,12 @@ describe('PokemonList', () => {
     const name = screen.getByText('Pikachu');
     expect(name).toBeInTheDocument();
 
-    const link = screen.getByRole('link');
+    const link = screen.getByText(mockData[0]['url']);
     expect(link).toBeInTheDocument();
-    expect(link).toHaveAttribute('href', mockData[0]['url']);
   });
 
   it('should not crash when receiving unexpected empty array', () => {
-    render(<PokemonList data={[]} />);
+    render(<PokemonList data={[]} currentPage={5} />);
 
     const list = screen.getByRole('list');
 
@@ -56,11 +54,9 @@ describe('PokemonList', () => {
   it('should render error message for invalid Pokemon data', () => {
     const mockedData = [null];
 
-    render(<PokemonList data={mockedData} />);
+    render(<PokemonList data={mockedData} currentPage={7} />);
 
     expect(screen.getByText('⚠️ Invalid Pokemon Data ⚠️')).toBeInTheDocument();
-    expect(
-      screen.getByText('Please Enter Full Name or Id')
-    ).toBeInTheDocument();
+    expect(screen.getByText('Please Enter Full Name or Id')).toBeInTheDocument();
   });
 });

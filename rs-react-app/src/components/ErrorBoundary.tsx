@@ -1,13 +1,9 @@
-import { Component, type ErrorInfo } from 'react';
-import type {
-  IErrorBoundaryProps,
-  IErrorBoundaryState,
-} from '../../../types/types';
+import { Component } from 'react';
+import type { ErrorInfo, PropsWithChildren } from 'react';
 
-class ErrorBoundary extends Component<
-  IErrorBoundaryProps,
-  IErrorBoundaryState
-> {
+import type { IErrorBoundaryState } from '../utils/types';
+
+class ErrorBoundary extends Component<PropsWithChildren, IErrorBoundaryState> {
   state = {
     error: false,
   };
@@ -19,9 +15,7 @@ class ErrorBoundary extends Component<
           <h3 className="mb-3 mt-4 text-red-500 text-2xl font-bold">
             ⚠️ Something went wrong while rendering ⚠️
           </h3>
-          <p className="mb-4 mt-3 text-red-500 text-xl font-bold">
-            Please Try Again
-          </p>
+          <p className="mb-4 mt-3 text-red-500 text-xl font-bold">Please Try Again</p>
           <button
             type="button"
             onClick={() => window.location.reload()}
