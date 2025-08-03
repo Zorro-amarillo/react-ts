@@ -1,5 +1,7 @@
 import { screen } from '@testing-library/react';
 
+import { BASE_URL } from '@/utils/constants';
+
 import { Pokemon } from '../../src/components';
 import { renderWithRouter } from '../test-utils/test-utils';
 
@@ -7,7 +9,7 @@ describe('Pokemon', () => {
   const mockedData = {
     pokemonData: {
       name: 'Pikachu',
-      url: 'https://pokeapi.co/api/v2/pokemon/25/',
+      url: `${BASE_URL}/25/`,
     },
     page: 3,
   };

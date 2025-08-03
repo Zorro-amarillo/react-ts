@@ -1,8 +1,7 @@
 import { hookResult, mockedFetch } from '../test-utils/test-utils';
+import { BASE_URL } from '../../src/utils/constants';
 
 describe('usePokemonService', () => {
-  const baseUrl = 'https://pokeapi.co/api/v2/pokemon';
-
   beforeEach(() => {
     global.fetch = mockedFetch;
   });
@@ -55,7 +54,7 @@ describe('usePokemonService', () => {
 
     expect(data).toEqual(mockedData);
     expect(mockedFetch).toHaveBeenCalledWith(
-      `${baseUrl}?limit=${mockedPageLimit}&offset=${mockedOffset}`
+      `${BASE_URL}?limit=${mockedPageLimit}&offset=${mockedOffset}`
     );
   });
 
@@ -64,7 +63,7 @@ describe('usePokemonService', () => {
 
     const pokemonName = 'bulbasaur';
     const pokemonId = 1;
-    const mockedUrl = `${baseUrl}/${pokemonName}`;
+    const mockedUrl = `${BASE_URL}/${pokemonName}`;
     const mockedData = {
       name: pokemonName,
       url: mockedUrl,
@@ -72,7 +71,7 @@ describe('usePokemonService', () => {
     };
     const expectedData = {
       ...mockedData,
-      url: `${baseUrl}/${pokemonId}`,
+      url: `${BASE_URL}/${pokemonId}`,
     };
     mockedFetch.mockResolvedValue({
       ok: true,

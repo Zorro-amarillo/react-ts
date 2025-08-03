@@ -1,5 +1,7 @@
 import { useCallback } from 'react';
 
+import { PAGE_LIMIT, BASE_URL } from '../utils/constants';
+
 import type { IServiceError } from '../types';
 
 class ServiceError extends Error implements IServiceError {
@@ -15,8 +17,6 @@ class ServiceError extends Error implements IServiceError {
 }
 
 const usePokemonService = () => {
-  const allPokemonsUrl = 'https://pokeapi.co/api/v2/pokemon';
-
   const getPokemonData = useCallback(async (url: string) => {
     try {
       const response = await fetch(url);
@@ -43,9 +43,8 @@ const usePokemonService = () => {
 
   const getAllPokemons = useCallback(
     async (page = 1) => {
-      const pageLimit = 10;
-      const offset = (page - 1) * pageLimit;
-      const urlToRender = `${allPokemonsUrl}?limit=${pageLimit}&offset=${offset}`;
+      const offset = (page - 1) * PAGE_LIMIT;
+      const urlToRender = `${BASE_URL}?limit=${PAGE_LIMIT}&offset=${offset}`;
 
       return await getPokemonData(urlToRender);
     },
@@ -55,14 +54,14 @@ const usePokemonService = () => {
   const getPokemon = useCallback(
     async (pokemon: string) => {
       try {
-        const url = `${allPokemonsUrl}/${pokemon}`;
+        const url = `${BASE_URL}/${pokemon}`;
         const pokemonData = await getPokemonData(url);
 
         if (!pokemonData) {
           throw new Error('Pokemon is not found');
         }
 
-        pokemonData.url = `${allPokemonsUrl}/${pokemonData.id}`;
+        pokemonData.url = `${BASE_URL}/${pokemonData.id}`;
 
         return pokemonData;
       } catch (err) {
