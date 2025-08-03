@@ -1,5 +1,3 @@
-import React from 'react';
-
 export interface IPokemon {
   sprites: { front_default: string | undefined };
   height: number;
@@ -19,10 +17,6 @@ export interface IPokemonProps {
 export interface IPokemonListProps {
   data: (IPokemonData | null)[];
   currentPage: number;
-}
-
-export interface IErrorBoundaryProps {
-  children: React.ReactNode;
 }
 
 export interface IErrorBoundaryState {
