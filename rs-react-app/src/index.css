@@ -15,22 +15,22 @@
   @media (prefers-color-scheme: light) {
     :root {
       color-scheme: light;
-      --color-text: #213547;
-      --color-bg: #ffffff;
-      --color-link: #646cff;
-      --color-link-hover: #747bff;
-      --color-btn-bg: #f9f9f9;
+      --color-text: hsl(208, 37%, 20%);
+      --color-bg: hsl(0, 0%, 100%);
+      --color-link: hsl(237, 100%, 70%);
+      --color-link-hover: hsl(237, 100%, 73%);
+      --color-btn-bg: hsl(0, 0%, 98%);
     }
   }
 
   @media (prefers-color-scheme: dark) {
     :root {
       color-scheme: dark;
-      --color-text: rgba(255, 255, 255, 0.87);
-      --color-bg: #181818;
-      --color-link: #646cff;
-      --color-link-hover: #535bf2;
-      --color-btn-bg: #2a2a2a;
+      --color-text: hsla(0, 0%, 100%, 0.87);
+      --color-bg: hsl(0, 0%, 9%);
+      --color-link: hsl(237, 100%, 70%);
+      --color-link-hover: hsl(237, 86%, 64%);
+      --color-btn-bg: hsl(0, 0%, 16%);
     }
   }
 
