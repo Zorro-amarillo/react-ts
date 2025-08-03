@@ -2,8 +2,8 @@ import { useState, useCallback, useEffect } from 'react';
 import type { ChangeEvent, MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import useLocalStorage from './useLocalStorage';
 import usePagination from './usePagination';
-import useLocalStorage from '../hooks/useLocalStorage';
 import usePokemonService from '../services/usePokemonService';
 import { PAGE_LIMIT } from '../utils/constants';
 

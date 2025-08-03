@@ -1,4 +1,4 @@
-import { Loader, Pagination, PokemonList, SearchForm, SearchResultsHeader } from './';
+import { Loader, Pagination, PokemonList, SearchResultsHeader, SearchForm } from './';
 
 import usePokemonSearch from '../hooks/usePokemonSearch';
 
