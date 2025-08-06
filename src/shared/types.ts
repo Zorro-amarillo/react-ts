@@ -23,7 +23,7 @@ export interface IErrorBoundaryState {
   error: boolean;
 }
 
-export interface IServiceError {
+export interface IApiError {
   status: number;
   errorText: string;
 }
