@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { BackToMainButton, Loader } from '.';
+import { BackToMainButton, Loader } from '..';
+import usePokemonService from '../../shared/api/usePokemonService';
 
-import usePokemonService from '../shared/api/usePokemonService';
-
-import type { IPokemon } from '../shared/types';
+import type { IPokemon } from '../../shared/types';
 
 const PokemonDetails = () => {
   const { pokemonName } = useParams();

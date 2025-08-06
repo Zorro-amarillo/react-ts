@@ -1,6 +1,5 @@
-import { Loader, Pagination, PokemonList, SearchResultsHeader, SearchForm } from '.';
-
-import usePokemonSearch from '../shared/hooks/usePokemonSearch';
+import { Loader, Pagination, PokemonList, SearchResultsHeader, SearchForm } from '..';
+import usePokemonSearch from '../../shared/hooks/usePokemonSearch';
 
 const SearchPanel = () => {
   const {

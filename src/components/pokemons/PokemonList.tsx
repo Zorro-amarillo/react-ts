@@ -1,7 +1,7 @@
-import ErrorBoundary from './ErrorBoundary';
+import ErrorBoundary from '../ErrorBoundary';
 import Pokemon from './Pokemon';
 
-import type { IPokemonListProps } from '../shared/types';
+import type { IPokemonListProps } from '../../shared/types';
 
 const PokemonList = (props: IPokemonListProps) => {
   const { data, currentPage } = props;
