@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { BackToMainButton, Loader } from '..';
-import usePokemonService from '../../shared/api/usePokemonService';
+import usePokemonApi from '../../shared/api/usePokemonApi';
 
 import type { IPokemon } from '../../shared/types';
 
 const PokemonDetails = () => {
   const { pokemonName } = useParams();
-  const { getPokemon } = usePokemonService();
+  const { getPokemon } = usePokemonApi();
   const navigate = useNavigate();
 
   const [pokemonData, setPokemonData] = useState<IPokemon | null>(null);

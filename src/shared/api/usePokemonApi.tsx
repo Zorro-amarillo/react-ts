@@ -1,22 +1,9 @@
 import { useCallback } from 'react';
 
 import { PAGE_LIMIT, BASE_URL } from '../constants';
+import ApiError from '../errors/ApiError';
 
-import type { IServiceError } from '../types';
-
-class ServiceError extends Error implements IServiceError {
-  status: number;
-  errorText: string;
-
-  constructor(message: string, status: number, errorText: string) {
-    super(message);
-    this.name = 'ServiceError';
-    this.status = status;
-    this.errorText = errorText;
-  }
-}
-
-const usePokemonService = () => {
+const usePokemonApi = () => {
   const getPokemonData = useCallback(async (url: string) => {
     try {
       const response = await fetch(url);
@@ -24,7 +11,7 @@ const usePokemonService = () => {
       if (!response.ok) {
         const errorText = await response.text();
 
-        throw new ServiceError(
+        throw new ApiError(
           `usePokemonService getPokemonData() failed, url: ${url}`,
           response.status,
           errorText
@@ -82,4 +69,4 @@ const usePokemonService = () => {
   };
 };
 
-export default usePokemonService;
+export default usePokemonApi;

@@ -2,9 +2,9 @@ import { render, renderHook } from '@testing-library/react';
 import type { ReactElement } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import usePokemonService from '../../src/shared/api/usePokemonService';
+import usePokemonApi from '../../src/shared/api/usePokemonApi';
 
-const { result } = renderHook(() => usePokemonService());
+const { result } = renderHook(() => usePokemonApi());
 const hookResult = result.current;
 
 const renderWithRouter = (component: ReactElement) => {

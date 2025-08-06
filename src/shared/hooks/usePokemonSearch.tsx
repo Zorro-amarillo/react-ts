@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import useLocalStorage from './useLocalStorage';
 import usePagination from './usePagination';
-import usePokemonService from '../api/usePokemonService';
+import usePokemonApi from '../api/usePokemonApi';
 import { PAGE_LIMIT } from '../constants';
 
 import type { IPokemonData } from '../types';
@@ -15,7 +15,7 @@ const usePokemonSearch = () => {
   const [searchResults, setSearchResults] = useState<IPokemonData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { getAllPokemons, getPokemon } = usePokemonService();
+  const { getAllPokemons, getPokemon } = usePokemonApi();
   const { savedPokemon, savePokemon } = useLocalStorage();
   const { currentPage, changePage, totalPages, setTotalPages } = usePagination();
   const inputValue = savedPokemon;
