@@ -1,51 +1,28 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { BackToMainButton, Loader } from '..';
-import usePokemonApi from '../../shared/api/usePokemonApi';
-
-import type { IPokemon } from '../../shared/types';
+import { useGetPokemonQuery } from '../../shared/api/pokemonApiSlice';
 
 const PokemonDetails = () => {
   const { pokemonName } = useParams();
-  const { getPokemon } = usePokemonApi();
   const navigate = useNavigate();
 
-  const [pokemonData, setPokemonData] = useState<IPokemon | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const result = useGetPokemonQuery(pokemonName);
+  const { data: pokemonData, isLoading, isFetching, isError } = result;
 
   useEffect(() => {
-    const getCurrentPokemon = async () => {
-      if (!pokemonName) {
-        setIsLoading(false);
-        return;
-      }
-
-      setIsLoading(true);
-
-      try {
-        const data = await getPokemon(pokemonName);
-        if (!data) {
-          throw new Error('Pokemon not found');
-        }
-        setPokemonData(data);
-      } catch (err) {
-        console.error(`PokemonDetails useEffect error: ${err}`);
-        setPokemonData(null);
-        navigate('/page404', { replace: true });
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    getCurrentPokemon();
-  }, [getPokemon, pokemonName, navigate]);
+    if (isError) {
+      console.error('PokemonDetails useEffect error');
+      navigate('/page404', { replace: true });
+    }
+  }, [isError, navigate]);
 
   if (!pokemonName) {
     return <p className="text-red-500 text-center mt-10">Invalid Pokemon name</p>;
   }
 
-  if (isLoading) {
+  if (isLoading || isFetching) {
     return (
       <div className="mt-10">
         <Loader />
