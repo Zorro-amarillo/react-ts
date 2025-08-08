@@ -9,3 +9,4 @@ export { default as PokemonList } from './pokemons/PokemonList';
 export { default as SearchPanel } from './search/SearchPanel';
 export { default as SearchForm } from './search/SearchForm';
 export { default as SearchResultsHeader } from './search/SearchResultsHeader';
+export { default as ErrorMessage } from './ErrorMessage';

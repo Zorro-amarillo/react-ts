@@ -1,4 +1,6 @@
+import { ErrorText } from '../../shared/constants';
 import ErrorBoundary from '../ErrorBoundary';
+import ErrorMessage from '../ErrorMessage';
 import Pokemon from './Pokemon';
 
 import type { IPokemonListProps } from '../../shared/types';
@@ -10,8 +12,7 @@ const PokemonList = (props: IPokemonListProps) => {
     if (!pokemon) {
       return (
         <ErrorBoundary key={`error-boundary-${index}`}>
-          <h3 className="mb-3 mt-4 text-gray-500 text-2xl font-bold">⚠️ Invalid Pokemon Data ⚠️</h3>
-          <p className="mb-4 mt-3 text-gray-500 text-xl font-bold">Please Enter Full Name or Id</p>
+          <ErrorMessage message={ErrorText.enterName} />
         </ErrorBoundary>
       );
     }
