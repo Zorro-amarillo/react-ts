@@ -7,9 +7,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 const renderWithRouter = (component: ReactElement) => {
   return render(
     <Provider store={store}>
-      <Router>
-        {component}
-      </Router>
+      <Router>{component}</Router>
     </Provider>
   );
 };

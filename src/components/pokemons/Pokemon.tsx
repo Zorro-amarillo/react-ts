@@ -1,9 +1,17 @@
 import { Link } from 'react-router-dom';
 
+import { ErrorMessage } from '../';
+import { ErrorText } from '../../shared/constants';
+
 import type { IPokemonProps } from '../../shared/types';
 
 const Pokemon = (props: IPokemonProps) => {
   const { pokemonData, page } = props;
+
+  if (!pokemonData) {
+    return <ErrorMessage message={ErrorText.tryAgain} />;
+  }
+
   const { name, url } = pokemonData;
 
   return (
