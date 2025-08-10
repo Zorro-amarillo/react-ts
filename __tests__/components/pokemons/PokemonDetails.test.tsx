@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 
 import { PokemonDetails } from '../../../src/components';
 import store from '../../../src/shared/store';
+import { renderWithRouter } from '../../test-utils/test-utils';
 
 describe('PokemonDetails', () => {
   it('should render Pokemon name', async () => {
@@ -18,5 +19,11 @@ describe('PokemonDetails', () => {
     );
 
     expect(await screen.findByText('Bulbasaur')).toBeInTheDocument();
+  });
+
+  it('should show error when there is no Pokemon name', () => {
+    renderWithRouter(<PokemonDetails />);
+
+    expect(screen.getByText(/invalid pokemon name/i)).toBeInTheDocument();
   });
 });
