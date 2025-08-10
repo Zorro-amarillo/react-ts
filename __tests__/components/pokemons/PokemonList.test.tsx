@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 
-import { PokemonList } from '../../src/components';
-import { renderWithRouter } from '../test-utils/test-utils';
+import { PokemonList } from '../../../src/components';
+import { renderWithRouter } from '../../test-utils/test-utils';
 
 describe('PokemonList', () => {
   it('should render correct number of Pokemons, when there are more than one Pokemon in the provided data', () => {

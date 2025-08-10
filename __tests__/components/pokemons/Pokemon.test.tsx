@@ -2,8 +2,8 @@ import { screen } from '@testing-library/react';
 
 import { BASE_URL } from '@/shared/constants';
 
-import { Pokemon } from '../../src/components';
-import { renderWithRouter } from '../test-utils/test-utils';
+import { Pokemon } from '../../../src/components';
+import { renderWithRouter } from '../../test-utils/test-utils';
 
 describe('Pokemon', () => {
   const mockedData = {
