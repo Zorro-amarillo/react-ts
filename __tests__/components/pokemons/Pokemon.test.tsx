@@ -30,4 +30,10 @@ describe('Pokemon', () => {
     const link = screen.getByText(mockedData.pokemonData.url);
     expect(link).toBeInTheDocument();
   });
+
+  it('should show error message when pokemonData is not provided', () => {
+    renderWithRouter(<Pokemon pokemonData={null} page={1} />);
+
+    expect(screen.getByText(/try again/i)).toBeInTheDocument();
+  });
 });
