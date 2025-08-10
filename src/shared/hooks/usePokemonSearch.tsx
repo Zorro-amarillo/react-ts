@@ -4,103 +4,95 @@ import { useNavigate } from 'react-router-dom';
 
 import useLocalStorage from './useLocalStorage';
 import usePagination from './usePagination';
-import usePokemonApi from '../api/usePokemonApi';
+import { useGetAllPokemonsQuery, useGetPokemonQuery } from '../api/pokemonApiSlice';
 import { PAGE_LIMIT } from '../constants';
 
 import type { IPokemonData } from '../types';
 
 const usePokemonSearch = () => {
-  const navigate = useNavigate();
-
   const [searchResults, setSearchResults] = useState<IPokemonData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { getAllPokemons, getPokemon } = usePokemonApi();
+  const navigate = useNavigate();
   const { savedPokemon, savePokemon } = useLocalStorage();
   const { currentPage, changePage, totalPages, setTotalPages } = usePagination();
-  const inputValue = savedPokemon;
 
-  const loadAllPokemons = useCallback(async () => {
-    setIsLoading(true);
+  const allPokemonsResult = useGetAllPokemonsQuery(currentPage, {
+    skip: !!savedPokemon,
+  });
+  const {
+    data: allPokemonsData,
+    isLoading: isLoadingAllPokemons,
+    isFetching: isFetchingAllPokemons,
+    isError: isErrorAllPokemons,
+  } = allPokemonsResult;
 
-    try {
-      const data = await getAllPokemons(currentPage);
-      const lastPage = Math.ceil(data.count / PAGE_LIMIT);
+  const pokemonResult = useGetPokemonQuery(savedPokemon, {
+    skip: !savedPokemon,
+  });
+  const {
+    data: pokemonsData,
+    isLoading: isLoadingPokemon,
+    isFetching: isFetchingPokemon,
+    isError: isErrorPokemon,
+  } = pokemonResult;
 
-      if (currentPage > lastPage) {
-        navigate('/page404', { replace: true });
-        return;
-      }
-
-      setSearchResults(data.results);
+  useEffect(() => {
+    if (!savedPokemon && allPokemonsData) {
+      const lastPage = Math.ceil(allPokemonsData.count / PAGE_LIMIT);
+      setSearchResults(allPokemonsData.results);
       setTotalPages(lastPage);
-    } catch (err) {
-      console.error(`SearchPanel.loadAllPokemons() failed: ${err}`);
-      navigate('/page404', { replace: true });
-    } finally {
-      setIsLoading(false);
     }
-  }, [getAllPokemons, currentPage, setTotalPages, navigate]);
+  }, [allPokemonsData, savedPokemon, setTotalPages]);
 
-  const searchPokemon = useCallback(
-    async (e?: MouseEvent<HTMLButtonElement>) => {
-      e?.preventDefault();
-      setIsLoading(true);
-
-      try {
-        if (!inputValue.trim()) {
-          const allPokemons = await getAllPokemons(currentPage);
-          console.log('Input is empty. Found Pokemons:', allPokemons.results);
-
-          setSearchResults(allPokemons.results);
-          setTotalPages(Math.ceil(allPokemons.count / PAGE_LIMIT));
-        } else {
-          const pokemon = await getPokemon(inputValue);
-
-          setSearchResults([pokemon]);
-          setTotalPages(1);
-
-          if (pokemon !== undefined) {
-            console.log('Found Pokemon:', pokemon);
-          }
-        }
-      } catch (err) {
-        console.error(`SearchPanel searchPokemon() failed. ${err}`);
-      } finally {
-        setIsLoading(false);
-      }
-    },
-    [inputValue, getAllPokemons, getPokemon, currentPage, setTotalPages]
-  );
-
-  const loadStartData = useCallback(async () => {
-    if (inputValue) {
-      await searchPokemon();
-    } else {
-      await loadAllPokemons();
+  useEffect(() => {
+    if (savedPokemon && pokemonsData) {
+      setSearchResults([pokemonsData]);
+      setTotalPages(1);
     }
-  }, [inputValue, loadAllPokemons, searchPokemon]);
+  }, [pokemonsData, savedPokemon, setTotalPages]);
 
   useEffect(() => {
     if (!Number.isInteger(currentPage) || currentPage < 1) {
-      navigate('/page404', { replace: true });
-      return;
+      navigate('/page404');
     }
+  }, [currentPage, navigate]);
 
-    loadStartData();
-  }, [currentPage, navigate, loadStartData]);
+  useEffect(() => {
+    if (isLoadingAllPokemons || isFetchingAllPokemons || isLoadingPokemon || isFetchingPokemon) {
+      setIsLoading(true);
+    } else {
+      setIsLoading(false);
+    }
+  }, [isFetchingAllPokemons, isFetchingPokemon, isLoadingAllPokemons, isLoadingPokemon]);
+
+  const onInputChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      const inputValue = event.target.value;
+      savePokemon(inputValue);
+
+      if (inputValue) {
+        changePage(1);
+      }
+    },
+    [savePokemon, changePage]
+  );
+
+  const onSearch = useCallback((e?: MouseEvent<HTMLButtonElement>) => {
+    e?.preventDefault();
+  }, []);
 
   return {
-    inputValue,
+    savedPokemon,
     searchResults,
     isLoading,
     totalPages,
     currentPage,
-    onInputValueChange: (event: ChangeEvent<HTMLInputElement>) => {
-      savePokemon(event.target.value);
-    },
+    onInputChange,
+    onSearch,
     changePage,
-    searchPokemon,
+    isErrorAllPokemons,
+    isErrorPokemon,
   };
 };
 

@@ -10,7 +10,7 @@ export interface IPokemonData {
 }
 
 export interface IPokemonProps {
-  pokemonData: IPokemonData;
+  pokemonData: IPokemonData | null;
   page: number;
 }
 

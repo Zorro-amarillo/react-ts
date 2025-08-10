@@ -1,25 +1,39 @@
-import { Loader, Pagination, PokemonList, SearchResultsHeader, SearchForm } from '..';
+import {
+  Loader,
+  Pagination,
+  PokemonList,
+  SearchResultsHeader,
+  SearchForm,
+  ErrorMessage,
+} from '../';
+import { ErrorText } from '../../shared/constants';
 import usePokemonSearch from '../../shared/hooks/usePokemonSearch';
 
 const SearchPanel = () => {
   const {
-    inputValue,
+    savedPokemon: inputValue,
     searchResults,
     isLoading,
     totalPages,
     currentPage,
-    onInputValueChange,
+    onInputChange,
+    onSearch,
     changePage,
-    searchPokemon,
+    isErrorAllPokemons,
+    isErrorPokemon,
   } = usePokemonSearch();
 
   return (
     <div className="w-full p-8" data-testid="search-panel">
-      <SearchForm value={inputValue} onChange={onInputValueChange} onSearch={searchPokemon} />
+      <SearchForm value={inputValue} onChange={onInputChange} onSearch={onSearch} />
 
       <SearchResultsHeader />
       {isLoading ? (
         <Loader />
+      ) : isErrorAllPokemons ? (
+        <ErrorMessage message={ErrorText.tryAgain} />
+      ) : isErrorPokemon ? (
+        <ErrorMessage message={ErrorText.enterName} />
       ) : (
         <>
           <PokemonList data={searchResults} currentPage={currentPage} />
