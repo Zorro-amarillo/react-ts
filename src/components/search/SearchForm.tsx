@@ -1,5 +1,7 @@
 import type { ChangeEvent, MouseEvent } from 'react';
 
+import { btnPrimaryStyle } from '../../shared/constants';
+
 const SearchForm = ({
   value,
   onChange,
@@ -18,15 +20,7 @@ const SearchForm = ({
         onChange={onChange}
         value={value}
       />
-      <button
-        onClick={onSearch}
-        className="btn h-10 text-white bg-gradient-to-r from-purple-500 to-pink-500
-              hover:bg-gradient-to-l focus:ring-4 focus:outline-none
-              focus:ring-purple-200 dark:focus:ring-purple-800
-              font-medium rounded-lg text-xs
-              px-4 py-2
-              whitespace-nowrap"
-      >
+      <button onClick={onSearch} className={btnPrimaryStyle}>
         Search Pokemon
       </button>
     </form>

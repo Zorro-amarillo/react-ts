@@ -25,6 +25,7 @@ const usePokemonSearch = () => {
     isLoading: isLoadingAllPokemons,
     isFetching: isFetchingAllPokemons,
     isError: isErrorAllPokemons,
+    refetch: refetchAllPokemons,
   } = allPokemonsResult;
 
   const pokemonResult = useGetPokemonQuery(savedPokemon, {
@@ -35,6 +36,7 @@ const usePokemonSearch = () => {
     isLoading: isLoadingPokemon,
     isFetching: isFetchingPokemon,
     isError: isErrorPokemon,
+    refetch: refetchPokemon,
   } = pokemonResult;
 
   useEffect(() => {
@@ -82,6 +84,16 @@ const usePokemonSearch = () => {
     e?.preventDefault();
   }, []);
 
+  const onClearCache = () => {
+    if (savedPokemon) {
+      refetchPokemon();
+      console.info('Cache for this Pokemon is cleared');
+    } else {
+      refetchAllPokemons();
+      console.info('Cache for all Pokemons is cleared');
+    }
+  };
+
   return {
     savedPokemon,
     searchResults,
@@ -93,6 +105,7 @@ const usePokemonSearch = () => {
     changePage,
     isErrorAllPokemons,
     isErrorPokemon,
+    onClearCache,
   };
 };
 

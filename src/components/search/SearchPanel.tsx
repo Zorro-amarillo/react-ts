@@ -6,7 +6,7 @@ import {
   SearchForm,
   ErrorMessage,
 } from '../';
-import { ErrorText } from '../../shared/constants';
+import { btnPrimaryStyle, ErrorText } from '../../shared/constants';
 import usePokemonSearch from '../../shared/hooks/usePokemonSearch';
 
 const SearchPanel = () => {
@@ -21,6 +21,7 @@ const SearchPanel = () => {
     changePage,
     isErrorAllPokemons,
     isErrorPokemon,
+    onClearCache,
   } = usePokemonSearch();
 
   return (
@@ -40,6 +41,10 @@ const SearchPanel = () => {
           <Pagination page={currentPage} totalPages={totalPages} onPageChange={changePage} />
         </>
       )}
+
+      <button className={`${btnPrimaryStyle} mt-8`} onClick={onClearCache}>
+        Clear Cache
+      </button>
     </div>
   );
 };
