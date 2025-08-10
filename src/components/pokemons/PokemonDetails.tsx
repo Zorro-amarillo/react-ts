@@ -3,13 +3,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { BackToMainButton, Loader } from '..';
 import { useGetPokemonQuery } from '../../shared/api/pokemonApiSlice';
+import { btnPrimaryStyle } from '../../shared/constants';
 
 const PokemonDetails = () => {
   const { pokemonName } = useParams();
   const navigate = useNavigate();
 
   const result = useGetPokemonQuery(pokemonName);
-  const { data: pokemonData, isLoading, isFetching, isError } = result;
+  const { data: pokemonData, isLoading, isFetching, isError, refetch } = result;
 
   useEffect(() => {
     if (isError) {
@@ -49,6 +50,9 @@ const PokemonDetails = () => {
           <p className="text-gray-500">{`Weight: ${pokemonData.weight}`}</p>
         </>
       )}
+      <button className={`${btnPrimaryStyle} mt-8`} onClick={refetch}>
+        Clear Pokemon Cache
+      </button>
     </>
   );
 };
