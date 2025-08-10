@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 import { ErrorMessage } from '../';
-import { ErrorText } from '../../shared/constants';
+import { BASE_URL, ErrorText } from '../../shared/constants';
 
 import type { IPokemonProps } from '../../shared/types';
 
@@ -12,7 +12,8 @@ const Pokemon = (props: IPokemonProps) => {
     return <ErrorMessage message={ErrorText.tryAgain} />;
   }
 
-  const { name, url } = pokemonData;
+  const { name, url, id } = pokemonData;
+  const currentUrl = url ?? `${BASE_URL}/${id}`;
 
   return (
     <li
@@ -35,7 +36,7 @@ const Pokemon = (props: IPokemonProps) => {
         className="flex flex-wrap items-center gap-4 w-full justify-center"
       >
         <p className="text-gray-500 flex-shrink-0">{`${name[0].toUpperCase()}${name.slice(1)}`}</p>
-        <p className="text-gray-500">{url}</p>
+        <p className="text-gray-500">{currentUrl}</p>
       </Link>
     </li>
   );

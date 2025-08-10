@@ -7,6 +7,7 @@ export interface IPokemon {
 export interface IPokemonData {
   name: string;
   url: string;
+  id?: number;
 }
 
 export interface IPokemonProps {
