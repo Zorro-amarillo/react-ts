@@ -33,15 +33,26 @@ describe('SearchPage', () => {
       </Provider>
     );
 
-    await waitFor(() => {
-      expect(screen.getByTestId('outlet-wrapper')).toBeInTheDocument();
-    }, { timeout: TEST_TIMEOUT });
-    const closeButton = await screen.findByRole('link', { name: /close card/i }, { timeout: TEST_TIMEOUT });
+    await waitFor(
+      () => {
+        expect(screen.getByTestId('outlet-wrapper')).toBeInTheDocument();
+      },
+      { timeout: TEST_TIMEOUT }
+    );
+    const closeButton = await screen.findByRole(
+      'link',
+      { name: /close card/i },
+      { timeout: TEST_TIMEOUT }
+    );
     expect(closeButton).toBeInTheDocument();
-    const heading = await screen.findByRole('heading', {
-      level: 3,
-      name: 'Bulbasaur',
-    }, { timeout: TEST_TIMEOUT });
+    const heading = await screen.findByRole(
+      'heading',
+      {
+        level: 3,
+        name: 'Bulbasaur',
+      },
+      { timeout: TEST_TIMEOUT }
+    );
     expect(heading).toBeInTheDocument();
   });
 });
