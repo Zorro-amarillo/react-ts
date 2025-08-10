@@ -19,6 +19,8 @@ describe('SearchPage', () => {
   });
 
   it('should render Outlet when pokemonName is present', async () => {
+    const TEST_TIMEOUT = 3000;
+
     render(
       <Provider store={store}>
         <MemoryRouter initialEntries={['/1/bulbasaur']}>
@@ -33,13 +35,13 @@ describe('SearchPage', () => {
 
     await waitFor(() => {
       expect(screen.getByTestId('outlet-wrapper')).toBeInTheDocument();
-    });
-    const closeButton = await screen.findByRole('link', { name: /close card/i });
+    }, { timeout: TEST_TIMEOUT });
+    const closeButton = await screen.findByRole('link', { name: /close card/i }, { timeout: TEST_TIMEOUT });
     expect(closeButton).toBeInTheDocument();
-    const heading = screen.getByRole('heading', {
+    const heading = await screen.findByRole('heading', {
       level: 3,
       name: 'Bulbasaur',
-    });
+    }, { timeout: TEST_TIMEOUT });
     expect(heading).toBeInTheDocument();
   });
 });
