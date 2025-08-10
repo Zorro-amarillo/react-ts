@@ -14,7 +14,7 @@ const SearchPage = () => {
         </div>
 
         {isOutlet ? (
-          <div className="w-1/2 bg-yellow-100 p-8">
+          <div className="w-1/2 bg-yellow-100 p-8" data-testid="outlet-wrapper">
             <Outlet />
           </div>
         ) : null}
