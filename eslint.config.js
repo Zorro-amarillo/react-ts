@@ -53,9 +53,14 @@ export default tseslint.config(
           groups: ['builtin', 'external', 'internal', 'index', ['parent', 'sibling'], 'type'],
           pathGroups: [
             {
-              pattern: '{react,react-router-dom,react-dom/client}',
+              pattern: '{react,react-router-dom,react-dom/client,react-redux}',
               group: 'external',
               position: 'before',
+            },
+            {
+              pattern: '{@testing-library/react,@testing-library/user-event}',
+              group: 'external',
+              position: 'after',
             },
             {
               pattern: '@/**',
