@@ -1,10 +1,11 @@
-import { screen, render, waitFor } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import store from '../../src/shared/store';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
+
+import { screen, render, waitFor } from '@testing-library/react';
 
 import { PokemonDetails } from '../../src/components';
 import { SearchPage } from '../../src/pages';
+import store from '../../src/shared/store';
 import { renderWithRouter } from '../test-utils/test-utils';
 
 describe('SearchPage', () => {
