@@ -30,9 +30,9 @@ A practical React training project demonstrating fundamental concepts through co
 
 `git clone https://github.com/Zorro-amarillo/react-ts.git`
 
-2. Go to folder rs-react-app:
+2. Go to folder react-ts:
 
-`cd rs-react-app`
+`cd react-ts`
 
 3. Install dependencies:
 
