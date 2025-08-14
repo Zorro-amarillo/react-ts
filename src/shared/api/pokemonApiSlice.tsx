@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { BASE_URL, PAGE_LIMIT } from '../constants';
+import { BASE_URL, PAGE_LIMIT } from '@/shared/constants';
 
 export const pokemonApiSlice = createApi({
   reducerPath: 'pokemonApi',

@@ -1,4 +1,4 @@
-import { BackToMainButton, Footer } from '../components';
+import { BackToMainButton, Footer } from '@components';
 
 const AboutPage = () => {
   return (

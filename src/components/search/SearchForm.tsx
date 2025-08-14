@@ -1,6 +1,6 @@
 import type { ChangeEvent, MouseEvent } from 'react';
 
-import { btnPrimaryStyle } from '../../shared/constants';
+import { btnPrimaryStyle } from '@/shared/constants';
 
 const SearchForm = ({
   value,
