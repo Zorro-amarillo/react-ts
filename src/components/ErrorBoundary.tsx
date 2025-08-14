@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import type { ErrorInfo, PropsWithChildren } from 'react';
 
-import type { IErrorBoundaryState } from '../shared/types';
+import type { IErrorBoundaryState } from '@/shared/types';
 
 class ErrorBoundary extends Component<PropsWithChildren, IErrorBoundaryState> {
   state = {

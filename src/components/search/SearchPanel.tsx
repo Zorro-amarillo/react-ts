@@ -1,3 +1,5 @@
+import { btnPrimaryStyle, ErrorText } from '@/shared/constants';
+import usePokemonSearch from '@/shared/hooks/usePokemonSearch';
 import {
   Loader,
   Pagination,
@@ -5,9 +7,7 @@ import {
   SearchResultsHeader,
   SearchForm,
   ErrorMessage,
-} from '../';
-import { btnPrimaryStyle, ErrorText } from '../../shared/constants';
-import usePokemonSearch from '../../shared/hooks/usePokemonSearch';
+} from '@components';
 
 const SearchPanel = () => {
   const {

@@ -1,6 +1,7 @@
-import { render, screen } from '@testing-library/react';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
+
+import { render, screen } from '@testing-library/react';
 
 import { PokemonDetails } from '../../../src/components';
 import store from '../../../src/shared/store';

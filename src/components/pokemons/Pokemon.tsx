@@ -1,9 +1,8 @@
 import { Link } from 'react-router-dom';
 
-import { ErrorMessage } from '../';
-import { BASE_URL, ErrorText } from '../../shared/constants';
-
-import type { IPokemonProps } from '../../shared/types';
+import { BASE_URL, ErrorText } from '@/shared/constants';
+import type { IPokemonProps } from '@/shared/types';
+import { ErrorMessage } from '@components';
 
 const Pokemon = (props: IPokemonProps) => {
   const { pokemonData, page } = props;

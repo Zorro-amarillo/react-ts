@@ -1,3 +1,3 @@
-export { default as AboutPage } from './AboutPage';
-export { default as Page404 } from './Page404';
-export { default as SearchPage } from './SearchPage';
+export { default as AboutPage } from '@/pages/AboutPage';
+export { default as Page404 } from '@/pages/Page404';
+export { default as SearchPage } from '@/pages/SearchPage';

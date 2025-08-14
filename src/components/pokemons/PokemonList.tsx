@@ -1,9 +1,6 @@
-import { ErrorText } from '../../shared/constants';
-import ErrorBoundary from '../ErrorBoundary';
-import ErrorMessage from '../ErrorMessage';
-import Pokemon from './Pokemon';
-
-import type { IPokemonListProps } from '../../shared/types';
+import { ErrorText } from '@/shared/constants';
+import type { IPokemonListProps } from '@/shared/types';
+import { ErrorBoundary, ErrorMessage, Pokemon } from '@components';
 
 const PokemonList = (props: IPokemonListProps) => {
   const { data, currentPage } = props;
