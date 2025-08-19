@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useCallback, useEffect } from 'react';
 import type { ChangeEvent, MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';

@@ -1,3 +1,5 @@
+'use client';
+
 import { configureStore } from '@reduxjs/toolkit';
 
 import { pokemonApiSlice } from '@/shared/api/pokemonApiSlice';

@@ -1,3 +1,5 @@
+'use client';
+
 import type { ChangeEvent, MouseEvent } from 'react';
 
 import { btnPrimaryStyle } from '@/shared/constants';
