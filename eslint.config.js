@@ -10,14 +10,14 @@ import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config({
-  ignores: ['dist', 'coverage/**/*'],
+  ignores: ['dist'],
   extends: [
     js.configs.recommended,
     ...tseslint.configs.strict,
     prettierConfig,
     eslintPluginPrettier,
   ],
-  files: ['src/**/*.{ts,tsx}', '__tests__/**/*.{test.ts,test.tsx}'],
+  files: ['src/**/*.{ts,tsx}'],
   languageOptions: {
     ecmaVersion: 2020,
     globals: globals.browser,
