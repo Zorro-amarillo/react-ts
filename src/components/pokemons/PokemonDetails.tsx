@@ -1,9 +1,11 @@
+'use client';
+
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { BackToMainButton, Loader } from '..';
-import { useGetPokemonQuery } from '../../shared/api/pokemonApiSlice';
-import { btnPrimaryStyle } from '../../shared/constants';
+import { useGetPokemonQuery } from '@/shared/api/pokemonApiSlice';
+import { btnPrimaryStyle } from '@/shared/constants';
+import { BackToMainButton, Loader } from '@components';
 
 const PokemonDetails = () => {
   const { pokemonName } = useParams();

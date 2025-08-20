@@ -1,8 +1,5 @@
 {
-  "extends": "./tsconfig.app.json",
-  "include": ["src/**/*.ts", "src/**/*.tsx", "eslint.config.js"],
-  "compilerOptions": {
-    "noEmit": true,
-    "skipLibCheck": true
-  }
+  "extends": "./tsconfig.json",
+  "include": ["**/*.ts", "**/*.tsx", ".eslintrc.cjs", "eslint.config.js"],
+  "exclude": ["node_modules"]
 }

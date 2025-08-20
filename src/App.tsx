@@ -1,7 +1,7 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
-import { ErrorBoundary, Footer, PokemonDetails, SearchPanel } from './components';
-import { AboutPage, Page404, SearchPage } from './pages';
+import { AboutPage, Page404, SearchPage } from '@/_pages-old';
+import { ErrorBoundary, Footer, PokemonDetails, SearchPanel } from '@components';
 
 const App = () => {
   return (

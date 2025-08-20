@@ -1,13 +1,14 @@
+'use client';
+
 import { useState, useCallback, useEffect } from 'react';
 import type { ChangeEvent, MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import useLocalStorage from './useLocalStorage';
-import usePagination from './usePagination';
-import { useGetAllPokemonsQuery, useGetPokemonQuery } from '../api/pokemonApiSlice';
-import { PAGE_LIMIT } from '../constants';
-
-import type { IPokemonData } from '../types';
+import { useGetAllPokemonsQuery, useGetPokemonQuery } from '@/shared/api/pokemonApiSlice';
+import { PAGE_LIMIT } from '@/shared/constants';
+import useLocalStorage from '@/shared/hooks/useLocalStorage';
+import usePagination from '@/shared/hooks/usePagination';
+import type { IPokemonData } from '@/shared/types';
 
 const usePokemonSearch = () => {
   const [searchResults, setSearchResults] = useState<IPokemonData[]>([]);
